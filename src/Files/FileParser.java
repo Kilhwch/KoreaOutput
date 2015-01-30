@@ -8,7 +8,11 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FileParser {
 
@@ -21,18 +25,23 @@ public class FileParser {
         list = new ArrayList<>();
     }
 
-    public ArrayList<Element> loadFile() throws FileNotFoundException, IOException {
+    public ArrayList<Element> loadFile() throws FileNotFoundException, IOException, ParseException {
         if (notEmptyFile(PATH + fName)) {
             BufferedReader br = new BufferedReader(new FileReader(new File(PATH + fName)));
             String line;
 
+            Date current = new Date();
+            
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(":", -2);
                 String question = parts[0];
                 String answer = parts[1];
-            
-                Element ele = new Element(question, answer);
-                list.add(ele);
+                String strDate = parts[2];
+                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = format.parse(strDate);
+                
+                Element ele = new Element(question, answer, date);
+                if (date.before(current)) list.add(ele); // add to list Only if date is smaller or equal to current date
             }
             br.close();
             return list;
