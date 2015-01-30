@@ -41,7 +41,7 @@ public class FileParser {
                 Date date = format.parse(strDate);
                 
                 Element ele = new Element(question, answer, date);
-                if (date.before(current)) list.add(ele); // add to list Only if date is smaller or equal to current date
+                if (date.before(current)) list.add(ele); // add Elements to list with dates that are in the past
             }
             br.close();
             return list;
