@@ -20,7 +20,7 @@ For example:
 
 // This is a text file //
 
-학겨:school:0
+학겨 : school : 0
 ...
 
 // text file ends here //
