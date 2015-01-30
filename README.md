@@ -20,7 +20,7 @@ For example:
 
 // This is a text file //
 
-학겨 : school : 0 (no spaces)
+학겨 : school : 0 (without spaces)
 
 // text file ends here //
 
