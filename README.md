@@ -4,7 +4,7 @@ A simple flash card program that allows the user to practice Korean keyboard. Pl
 
 Building flash cards
 
-Flash card format: question:answer:date (date being the time when the learning material should be shown to the learner. Date is set 0 or null if left unspecified). 
+Flash card format = question:answer:date. (Date tells the difficulty of the card. If the card is easy, you should set the date further away. Date is set 0 or null if left unspecified). 
 
 Supported file formats
 
@@ -26,7 +26,7 @@ KoreaOutputとは？
 
 フラッシュカードの作り方
 
-フォーマット：質問：回答：日時（日時はとは、練習マテリアルを次にいつ見せますか？というデータです。NULL/空に設定する場合、自動的に”０”に設定されます。
+フォーマット＝質問：回答：日時（日時はカードの難しさを表すデータです。カードは簡単の場合、数字を当日から離れてる日に設定すれば良いです。NULL/空に設定する場合、自動的に”０（当日／難しい）”に設定されます。
 
 ファイルフォーマット
 
