@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,7 +31,9 @@ public class Study {
     protected static final String ICONPATH = "./Files/Icons/main.jpg";
        
     public JButton check;
+    
     public JButton next;
+    
     public JLabel question;
     public JLabel answer;
     public JTextField userInput;
@@ -53,13 +56,14 @@ public class Study {
     public void init() {
         
         // file validity start
-        FileParser parse = new FileParser(fName);
+        FileParser file = new FileParser(fName);
         try {
-            list = parse.loadFile();
+            list = file.loadFile();
             
-        } catch (IOException ex) {
+        } catch (IOException | ParseException ex) {
             Logger.getLogger(Study.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         // file validity end
         
         JFrame frame = new JFrame(fName);

@@ -1,8 +1,9 @@
 package ActionListeners;
+import Dates.Dates;
 import Elements.Element;
 import Files.FileParser;
 import java.awt.event.ActionEvent;
-import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -20,6 +21,8 @@ public class StudyListener extends AbstractAction {
     public int index;
     public int guessCounter = 3;
     public String fName;
+    
+    private FileParser file;
     
     
     public StudyListener() {
@@ -43,11 +46,14 @@ public class StudyListener extends AbstractAction {
         if (list.isEmpty()) {
             loadEmpty();
         }
-        else { // first question
+        
+        // first question
+        else {
             question.setText(list.get(index).getQuestion());
             answer.setText(list.get(index).getAnswer());
             answer.setVisible(false);
         }
+        
         
     }
     
@@ -68,18 +74,23 @@ public class StudyListener extends AbstractAction {
             }
             else if (userInput.getText().equals(answer.getText())) {
                 showAnswer();
-                userInput.setEnabled(false);
+                userInput.setVisible(false);
             }
             checkCounter();
         }
         
         
         else if (e.getActionCommand().equals(Actions.Next.name())) {
+            long days = 40;
+            updateDate(days);
             nullCheck();
             initNext();
+            
         }
         
         else if (e.getActionCommand().equals(Actions.Exit.name())) {
+            file = new FileParser(fName, list);
+            file.updateFile();
             System.exit(0);
         }
         
@@ -90,25 +101,29 @@ public class StudyListener extends AbstractAction {
         else if (e.getActionCommand().equals(Actions.Delete.name())) {
             if (list.size() <= 0) return; // empty file
             
-            FileParser file = new FileParser(fName);
-            
-            if (hasIndex(index)) { // removing the first or middle
-                remove(file);
+            // removing the first or middle index
+            if (hasIndex(index)) {
+                remove();
                 loadNext();
             }
-            else { // removing the last index
-                remove(file);
+            
+            // removing the last and jump to the beginning
+            else if (list.size() > 1) {
+                remove();
+                index = 0;
+                loadNext();
+            }
+            else {
+                remove();
                 loadEmpty();
             }
-            
         }
     }
     
     // assist methods
     
-    private void remove(FileParser file) {
+    private void remove() {
         list.remove(index);
-        file.removeLine(index);
     }
     
     private void initNext() {
@@ -133,6 +148,7 @@ public class StudyListener extends AbstractAction {
     public void loadEmpty() {
         question.setVisible(false);
         check.setEnabled(false);
+        userInput.setVisible(false);
     }
     
     public boolean hasIndex(int index) {
@@ -164,5 +180,10 @@ public class StudyListener extends AbstractAction {
         answer.setVisible(true);
         check.setVisible(false);
         next.setVisible(true);
+    }
+    
+    public void updateDate(long days) {
+        LocalDate newDate = LocalDate.parse(list.get(index).getDate().toString()).plusDays(days);
+        list.get(index).setDate(newDate);
     }
 }

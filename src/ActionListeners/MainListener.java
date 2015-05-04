@@ -24,7 +24,6 @@ public class MainListener extends AbstractAction {
     }
 
     private enum Actions {
-
         Open,
         Exit
     }

@@ -1,16 +1,16 @@
 
 package Elements;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 
 public class Element {
 
-    private final String question;
-    private final String answer;
-    private Date date;
+    public final String question;
+    public final String answer;
+    public LocalDate date;
     
-    public Element(String question, String answer, Date date) {
+    public Element(String question, String answer, LocalDate date) {
         this.question = question;
         this.answer = answer;
         this.date = date;
@@ -23,7 +23,17 @@ public class Element {
     public String getAnswer() {
         return answer;
     }
-    
-    
-    
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return question+":"+answer+":"+date;
+    }
 }

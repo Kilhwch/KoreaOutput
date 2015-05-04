@@ -8,11 +8,10 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FileParser {
 
@@ -24,49 +23,52 @@ public class FileParser {
         this.fName = title;
         list = new ArrayList<>();
     }
+    
+    public FileParser(String title, ArrayList<Element> list) {
+        this.fName = title;
+        this.list = list;
+    }
 
     public ArrayList<Element> loadFile() throws FileNotFoundException, IOException, ParseException {
         if (notEmptyFile(PATH + fName)) {
             BufferedReader br = new BufferedReader(new FileReader(new File(PATH + fName)));
             String line;
 
-            Date current = new Date();
+            LocalDate current = LocalDate.now();
             
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(":", -2);
                 String question = parts[0];
                 String answer = parts[1];
                 String strDate = parts[2];
-                DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = format.parse(strDate);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate date = LocalDate.parse(strDate, dtf);
                 
                 Element ele = new Element(question, answer, date);
-                if (date.before(current)) list.add(ele); // add Elements to list with dates that are in the past
+                
+                // add Elements to list with dates that are in the past
+                if (date.isBefore(current)) list.add(ele);
             }
             br.close();
             return list;
         }
-        System.out.println("nullia");
         return null;
     }
     
-    public void removeLine(int index) {
+    public void updateFile() {
+        System.out.println("updating file");
         try {
         File file = new File(PATH + fName);
         File temp = new File(PATH + "tmp.txt");
-        String line;
         
         BufferedReader br = new BufferedReader(new FileReader(file));
         BufferedWriter pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(temp), "UTF-8"));
-        int counter = 0;
         
-        while ((line = br.readLine()) != null) {
-            if (counter != index) {
-                pw.write(line);
-                pw.newLine();
-            }
-            counter++;
+        for (Element element : list) {
+            pw.write(element.toString());
+            pw.newLine();
         }
+        
         pw.flush();
         pw.close();
         br.close();
