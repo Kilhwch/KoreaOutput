@@ -1,5 +1,4 @@
 package ActionListeners;
-import Dates.Dates;
 import Elements.Element;
 import Files.FileParser;
 import java.awt.event.ActionEvent;
@@ -12,37 +11,27 @@ import javax.swing.JTextField;
 
 public class StudyListener extends AbstractAction {
     
-    public JButton check;
-    public JButton next;
+    public JButton check, easy, medium, hard;
     public JTextField userInput;
-    public JLabel question;
-    public JLabel answer;
+    public JLabel question, answer;
     public ArrayList<Element> list;
-    public int index;
+    public int index = 0;
     public int guessCounter = 3;
     public String fName;
     
     private FileParser file;
-    
-    
-    public StudyListener() {
-    }
     
     public StudyListener(String msg, Integer mnemonic) {
         super(msg);
         putValue(MNEMONIC_KEY, mnemonic);
     }
 
-    public StudyListener(JButton check, JButton next, JLabel question, JLabel answer, 
-            JTextField userInput, ArrayList<Element> list, int index, String fName) {
-        this.check = check;
-        this.next = next;
-        this.question = question;
-        this.answer = answer;
-        this.userInput = userInput;
-        this.list = list;
-        this.index = index;
-        this.fName = fName;
+    public StudyListener(JButton check, JButton easy, JButton medium, JButton hard, JLabel question, 
+            JLabel answer, ArrayList<Element> list) {
+        
+        this.check = check; this.easy = easy; this.medium = medium; this.hard = hard;
+        this.question = question; this.list = list;
+        
         if (list.isEmpty()) {
             loadEmpty();
         }
@@ -51,16 +40,14 @@ public class StudyListener extends AbstractAction {
         else {
             question.setText(list.get(index).getQuestion());
             answer.setText(list.get(index).getAnswer());
-            answer.setVisible(false);
+            answer.setVisible(true);
         }
-        
-        
     }
     
     public enum Actions {
         Exit,
         Check,
-        Next,
+        Hard, Medium, Easy,
         Add,
         Delete
     }
@@ -80,12 +67,25 @@ public class StudyListener extends AbstractAction {
         }
         
         
-        else if (e.getActionCommand().equals(Actions.Next.name())) {
-            long days = 40;
+        else if (e.getActionCommand().equals(Actions.Hard.name())) {
+            long days = list.get(index).calculateDue("Hard");
             updateDate(days);
             nullCheck();
             initNext();
-            
+        }
+        
+        else if (e.getActionCommand().equals(Actions.Medium.name())) {
+            long days = list.get(index).calculateDue("Medium");
+            updateDate(days);
+            nullCheck();
+            initNext();
+        }
+                
+        else if (e.getActionCommand().equals(Actions.Easy.name())) {
+            long days = list.get(index).calculateDue("Easy");
+            updateDate(days);
+            nullCheck();
+            initNext();
         }
         
         else if (e.getActionCommand().equals(Actions.Exit.name())) {
@@ -132,7 +132,9 @@ public class StudyListener extends AbstractAction {
         question.setText(list.get(index).getQuestion());
         answer.setText(list.get(index).getAnswer());
         userInput.setText("");
-        next.setVisible(false);
+        easy.setVisible(false);
+        medium.setVisible(false);
+        hard.setVisible(false);
         check.setVisible(true);
         answer.setVisible(false);
     }
@@ -142,7 +144,9 @@ public class StudyListener extends AbstractAction {
         answer.setText(list.get(index).getAnswer());
         
         answer.setVisible(false);
-        next.setVisible(false);
+        easy.setVisible(false);
+        medium.setVisible(false);
+        hard.setVisible(false);
     }
     
     public void loadEmpty() {
@@ -168,7 +172,9 @@ public class StudyListener extends AbstractAction {
         userInput.setText("");
         if (guessCounter <= 0) {
             userInput.setVisible(false);
-            next.setVisible(false);
+            easy.setVisible(false);
+            medium.setVisible(false);
+            hard.setVisible(false);
             check.setVisible(true);
             guessCounter = 3;
             showAnswer();
@@ -179,7 +185,9 @@ public class StudyListener extends AbstractAction {
         answer.setText(list.get(index).getAnswer());
         answer.setVisible(true);
         check.setVisible(false);
-        next.setVisible(true);
+        easy.setVisible(true);
+        medium.setVisible(true);
+        hard.setVisible(true);
     }
     
     public void updateDate(long days) {

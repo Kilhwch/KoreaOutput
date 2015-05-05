@@ -1,19 +1,21 @@
 
 package Elements;
 
+import Dates.Due;
 import java.time.LocalDate;
 
 
 public class Element {
 
-    public final String question;
-    public final String answer;
-    public LocalDate date;
+    private final String question, answer;
+    private LocalDate date;
+    private final Due due;
     
     public Element(String question, String answer, LocalDate date) {
         this.question = question;
         this.answer = answer;
         this.date = date;
+        due = new Due();
     }
 
     public String getQuestion() {
@@ -30,6 +32,10 @@ public class Element {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+    
+    public long calculateDue(String difficulty) {
+        return due.calculate(difficulty);
     }
 
     @Override
