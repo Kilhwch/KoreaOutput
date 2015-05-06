@@ -1,94 +1,97 @@
 package ActionListeners;
 import Elements.Element;
 import Files.FileParser;
+import Main.StudyFrame;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class StudyListener extends AbstractAction {
     
-    public JButton check, easy, medium, hard;
-    public JTextField userInput;
-    public JLabel question, answer;
-    public ArrayList<Element> list;
-    public int index = 0;
-    public int guessCounter = 3;
-    public String fName;
+    private JButton check, easy, medium, hard;
+    private JTextField userInput;
+    private JLabel question, answer;
+    private ArrayList<Element> list;
+    private int index = 0;
+    private String fName;
     
     private FileParser file;
+
+    public StudyListener() {
+        
+    }
+    
     
     public StudyListener(String msg, Integer mnemonic) {
         super(msg);
         putValue(MNEMONIC_KEY, mnemonic);
     }
-
-    public StudyListener(JButton check, JButton easy, JButton medium, JButton hard, JLabel question, 
-            JLabel answer, ArrayList<Element> list) {
-        
-        this.check = check; this.easy = easy; this.medium = medium; this.hard = hard;
-        this.question = question; this.list = list;
-        
-        if (list.isEmpty()) {
-            loadEmpty();
-        }
-        
-        // first question
-        else {
-            question.setText(list.get(index).getQuestion());
-            answer.setText(list.get(index).getAnswer());
-            answer.setVisible(false);
-//            easy.setVisible(false);
-//            medium.setVisible(false);
-//            hard.setVisible(false);
-        }
+    
+    public StudyListener(JButton check, JLabel question, 
+            JLabel answer, JTextField userInput, ArrayList<Element> list) {
+            this.check = check; this.question = question; this.answer = answer; 
+            this.userInput = userInput; this.list = list;
+            init();
     }
+    
+    public StudyListener(JButton easy, JButton medium, JButton hard, 
+            JLabel question, JLabel answer, JTextField userInput, ArrayList<Element> list) {
+            
+            this.easy = easy; this.medium = medium; this.hard = hard; 
+            this.question = question; this.answer = answer; this.userInput = userInput; this.list = list;
+            
+            init();
+    }
+    
+    private void init() {
+        System.out.println(question.isVisible());
+    }
+   
     
     public enum Actions {
         Exit,
         Check,
-        Hard, Medium, Easy,
+        Easy, Medium, Hard,
         Add,
         Delete
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         if (e.getActionCommand().equals(Actions.Check.name())) {
-            if (!userInput.getText().equals(answer.getText())) {
-                --guessCounter;
-            }
-            else if (userInput.getText().equals(answer.getText())) {
-                showAnswer();
-                userInput.setVisible(false);
-            }
-            checkCounter();
+            show();
         }
         
-        
         else if (e.getActionCommand().equals(Actions.Hard.name())) {
-            long days = list.get(index).calculateDue("Hard");
-            updateDate(days);
+//            long days = list.get(index).calculateDue("Hard");
+//            updateDate(days);
             nullCheck();
-            initNext();
+            hide();
+//            study = new StudyFrame();
+//            study.windowInit("StudyFrameHide");
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
-            long days = list.get(index).calculateDue("Medium");
-            updateDate(days);
+//            long days = list.get(index).calculateDue("Medium");
+//            updateDate(days);
             nullCheck();
-            initNext();
+            hide();
+//            study = new StudyFrame();
+//            study.windowInit("StudyFrameHide");
         }
                 
         else if (e.getActionCommand().equals(Actions.Easy.name())) {
-            long days = list.get(index).calculateDue("Easy");
-            updateDate(days);
+//            long days = list.get(index).calculateDue("Easy");
+//            updateDate(days);
             nullCheck();
-            initNext();
+            hide();
+//            study = new StudyFrame();
+//            study.windowInit("StudyFrameHide");
         }
         
         else if (e.getActionCommand().equals(Actions.Exit.name())) {
@@ -107,14 +110,12 @@ public class StudyListener extends AbstractAction {
             // removing the first or middle index
             if (hasIndex(index)) {
                 remove();
-                loadNext();
             }
             
             // removing the last and jump to the beginning
             else if (list.size() > 1) {
                 remove();
                 index = 0;
-                loadNext();
             }
             else {
                 remove();
@@ -129,27 +130,25 @@ public class StudyListener extends AbstractAction {
         list.remove(index);
     }
     
-    private void initNext() {
-        userInput.setVisible(true);
-        userInput.setEnabled(true);
-        question.setText(list.get(index).getQuestion());
-        answer.setText(list.get(index).getAnswer());
-        userInput.setText("");
-        easy.setVisible(false);
-        medium.setVisible(false);
-        hard.setVisible(false);
-        check.setVisible(true);
-        answer.setVisible(false);
-    }
-    
-    public void loadNext() {
+    public void show() {
         question.setText(list.get(index).getQuestion());
         answer.setText(list.get(index).getAnswer());
         
+        userInput.setVisible(false);
+        question.setVisible(true);
+        answer.setVisible(true);
+        easy.setVisible(true);
+        medium.setVisible(true);
+        hard.setVisible(true);
+    }
+    
+    public void hide() {
+        question.setText(list.get(index).getQuestion());
+        answer.setText(list.get(index).getAnswer());
+        userInput.setVisible(true);
         answer.setVisible(false);
-        easy.setVisible(false);
-        medium.setVisible(false);
-        hard.setVisible(false);
+        
+        check.setVisible(true);
     }
     
     public void loadEmpty() {
@@ -169,28 +168,6 @@ public class StudyListener extends AbstractAction {
         else {
             index = 0;
         }
-    }
-    
-    public void checkCounter() {
-        userInput.setText("");
-        if (guessCounter <= 0) {
-            userInput.setVisible(false);
-            easy.setVisible(false);
-            medium.setVisible(false);
-            hard.setVisible(false);
-            check.setVisible(true);
-            guessCounter = 3;
-            showAnswer();
-        }
-    }
-    
-    public void showAnswer() {
-        answer.setText(list.get(index).getAnswer());
-        answer.setVisible(true);
-        check.setVisible(false);
-        easy.setVisible(true);
-        medium.setVisible(true);
-        hard.setVisible(true);
     }
     
     public void updateDate(long days) {

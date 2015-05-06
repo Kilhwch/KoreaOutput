@@ -39,7 +39,7 @@ public class MainFrameListener extends AbstractAction {
             int returnVal = chooser.showOpenDialog(chooser);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 StudyFrame study = new StudyFrame(chooser.getSelectedFile().getName());
-                study.init();
+                study.windowInit("StudyFrameHide");
                 frame.dispose();
             }
         }
