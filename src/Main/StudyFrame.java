@@ -83,34 +83,37 @@ public class StudyFrame extends JPanel {
         c.gridy = 6;
         JButton hard = buttonFactory("Hard", gridbag, c);
 
-        c.weightx = 3;
-        c.weighty = 3;
+//        c.weightx = 2;
+//        c.weighty = 2;
         c.gridx = 2;
-        c.gridy = 2;
-        c.anchor = GridBagConstraints.PAGE_START;
+        c.gridy = 4;
+        c.anchor = GridBagConstraints.CENTER;
         JLabel question = labelFactory(gridbag, c);
         
         c.anchor = GridBagConstraints.CENTER;
         c.ipady = 30;
-        c.weightx = 0;
+//        c.weightx = 1;
+//        c.weightx = 1;
         c.gridwidth = 4;
         c.gridx = 0;
-        c.gridy = 3;
+        c.gridy = 5;
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
         gridbag.setConstraints(separator, c);
         add(separator);
         
-        c.weightx = 2;
-        c.weighty = 2;
+//        c.weightx = 2;
+//        c.weighty = 2;
         c.gridx = 2;
-        c.gridy = 3;
-        c.anchor = GridBagConstraints.CENTER;
+        c.gridy = 5;
+        c.anchor = GridBagConstraints.PAGE_END;
         JLabel answer = labelFactory(gridbag, c);
         
-        c.weightx = 3;
-        c.weighty = 3;
+        c.gridwidth = 2;
+//        c.weightx = 2;
+//        c.weighty = 2;
         c.gridx = 1;
-        c.gridy = 4;
+        c.gridy = 6;
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.anchor = GridBagConstraints.CENTER;
         JTextField userInput = new JTextField();
         gridbag.setConstraints(userInput, c);

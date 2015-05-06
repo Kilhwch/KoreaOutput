@@ -40,7 +40,10 @@ public class StudyListener extends AbstractAction {
         else {
             question.setText(list.get(index).getQuestion());
             answer.setText(list.get(index).getAnswer());
-            answer.setVisible(true);
+            answer.setVisible(false);
+//            easy.setVisible(false);
+//            medium.setVisible(false);
+//            hard.setVisible(false);
         }
     }
     
