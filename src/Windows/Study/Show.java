@@ -19,7 +19,7 @@ public class Show extends JPanel {
 
     private UISwapInterface swap;
     
-    public ArrayList<Element> list;
+    private ArrayList<Element> list;
 
     public Show(UISwapInterface swap, ArrayList<Element> list) {
         this.swap = swap;
@@ -32,6 +32,7 @@ public class Show extends JPanel {
         c.weightx = 4;
         c.weighty = 4;
         
+        c.ipady = 8;
         c.anchor = GridBagConstraints.LAST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 6; 
@@ -39,6 +40,7 @@ public class Show extends JPanel {
         JButton easy = new JButton("Easy");
         gridbag.setConstraints(easy, c);
         add(easy);
+        
         
         c.gridx = 5; 
         c.gridy = 5;
@@ -52,7 +54,7 @@ public class Show extends JPanel {
         gridbag.setConstraints(hard, c);
         add(hard);
         
-
+        c.ipady = 0;
         c.gridx = 5; 
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
@@ -61,15 +63,15 @@ public class Show extends JPanel {
         question.setText(list.get(0).getQuestion());
         add(question);
         
-
-        c.gridx = 5; 
+        c.gridwidth = 3;
+        c.gridx = 4; 
         c.gridy = 4;
         c.anchor = GridBagConstraints.CENTER;
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
         gridbag.setConstraints(separator, c);
         add(separator);
         
-        c.gridx = 5; 
+        c.gridx = 4; 
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
         JLabel answer = new JLabel("", SwingConstants.CENTER);
@@ -77,20 +79,18 @@ public class Show extends JPanel {
         gridbag.setConstraints(answer, c);
         add(answer);
         
-        c.ipady = 30;
         c.gridwidth = 1;
         c.gridx = 5; 
         c.gridy = 5;
         c.anchor = GridBagConstraints.CENTER;
         JTextField userInput = new JTextField();
         gridbag.setConstraints(userInput, c);
+        userInput.setVisible(false);
         add(userInput);
         
         ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, list);
         easy.addActionListener(listener);
         medium.addActionListener(listener);
         hard.addActionListener(listener);
-        
-        System.out.println("SHOW: " + "Q: " + question.isVisible() + "A:" + answer.isVisible());
     }
 }

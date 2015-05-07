@@ -64,6 +64,7 @@ public class HideListener extends AbstractAction {
         if (hasNext()) {
             question.setText(list.get(index).getQuestion());
             answer.setText(list.get(index).getAnswer());
+            userInput.setVisible(false);
             index++;
         } else {
             System.exit(0);

@@ -3,6 +3,7 @@ package Windows.Study;
 
 import ActionListeners.ShowListener;
 import Elements.Element;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
@@ -17,9 +18,8 @@ import javax.swing.SwingConstants;
 
 public class Hide extends JPanel {
 
-    public UISwapInterface swap;
-    public static final String SHOW = "show";
-    public ArrayList<Element> list;
+    private UISwapInterface swap;
+    private ArrayList<Element> list;
 
     public Hide(UISwapInterface swap, ArrayList<Element> list) {
         this.swap = swap;
@@ -31,14 +31,15 @@ public class Hide extends JPanel {
         
         c.weightx = 4;
         c.weighty = 4;
-        c.anchor = GridBagConstraints.LAST_LINE_START;
-        c.fill = GridBagConstraints.HORIZONTAL;
+        c.anchor = GridBagConstraints.SOUTH;
         c.gridx = 6; 
         c.gridy = 5;
         JButton check = new JButton("Check");
+        check.setPreferredSize(new Dimension(300, 30));
         gridbag.setConstraints(check, c);
         add(check);
 
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 6; 
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
@@ -62,7 +63,9 @@ public class Hide extends JPanel {
         gridbag.setConstraints(answer, c);
         add(answer);
         
-        c.ipady = 30;
+        c.fill = GridBagConstraints.RELATIVE;
+        c.ipady = 15;
+        c.ipadx = 300;
         c.gridwidth = 2;
         c.gridx = 6;
         c.gridy = 5;
@@ -73,8 +76,5 @@ public class Hide extends JPanel {
         
         ActionListener listener = new ShowListener(swap, check, question, answer, userInput, list);
         check.addActionListener(listener);
-        
-        System.out.println("HIDE: " + "Q: " + question.isVisible() + "A:" + answer.isVisible());
     }
-   
 }

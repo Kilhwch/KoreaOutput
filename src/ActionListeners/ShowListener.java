@@ -25,7 +25,7 @@ public class ShowListener extends AbstractAction {
     private JButton check;
     private JLabel question, answer;
     private JTextField userInput;
-    public UISwapInterface swap;
+    private UISwapInterface swap;
     
     
     public ShowListener(UISwapInterface swap, JButton check, JLabel question, JLabel answer, 
@@ -53,7 +53,6 @@ public class ShowListener extends AbstractAction {
     
     private void showAnswer() {
         if (hasNext()) {
-            System.out.println("Showing answer index: " + index);
             question.setText(list.get(index).getQuestion());
             index++;
         }
