@@ -1,6 +1,6 @@
-package Main;
+package Windows;
 
-import ActionListeners.MainFrameListener;
+import ActionListeners.MainListener;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainFrame extends JPanel {
+public class MainF extends JPanel {
 
     protected static final int WINDOW_WIDTH = 220;
     protected static final int WINDOW_HEIGHT = 120;
@@ -19,7 +19,7 @@ public class MainFrame extends JPanel {
     
     public static void main(String[] args) {
         JFrame f = new JFrame(title);
-        JPanel pane = new MainFrame(f);
+        JPanel pane = new MainF(f);
         f.add("Center", pane);
         
         ImageIcon icon = new ImageIcon(ICONPATH);
@@ -31,7 +31,7 @@ public class MainFrame extends JPanel {
         f.setVisible(true);
     }
     
-    public MainFrame(JFrame f) {
+    public MainF(JFrame f) {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -51,7 +51,7 @@ public class MainFrame extends JPanel {
     
     // Implementations @ MainFrameListener class
     protected void addListeners(JButton open, JButton exit, JFrame f) {
-        ActionListener listener = new MainFrameListener(open, exit, f);
+        ActionListener listener = new MainListener(open, exit, f);
         open.addActionListener(listener);
         exit.addActionListener(listener);
     }
