@@ -21,7 +21,7 @@ public class HideListener extends AbstractAction {
     private JButton easy, medium, hard;
     private JLabel question, answer;
     private JTextField userInput;
-    private int index = 0;
+    private int index = 1;
     
     public HideListener(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, 
             JTextField userInput, UISwapInterface swap, ArrayList<Element> list) {

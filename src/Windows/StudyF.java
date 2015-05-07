@@ -48,6 +48,7 @@ public class StudyF extends JFrame implements UISwapInterface {
         JMenuBar menu = new Menu();
         setJMenuBar(menu);
         
+        swapView(HIDE);
         setTitle(fName);
         ImageIcon icon = new ImageIcon(ICONPATH);
         setIconImage(icon.getImage());

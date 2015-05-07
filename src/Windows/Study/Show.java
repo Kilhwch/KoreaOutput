@@ -17,7 +17,6 @@ import javax.swing.SwingConstants;
 
 public class Show extends JPanel {
 
-    private static final String HIDE = "hide";
     private UISwapInterface swap;
     
     public ArrayList<Element> list;
@@ -25,10 +24,7 @@ public class Show extends JPanel {
     public Show(UISwapInterface swap, ArrayList<Element> list) {
         this.swap = swap;
         this.list = list;
-        init(list);
-    }
-    
-    public void init(ArrayList<Element> list) {
+        
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -62,6 +58,7 @@ public class Show extends JPanel {
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
         gridbag.setConstraints(question, c);
+        question.setText(list.get(0).getQuestion());
         add(question);
         
 
@@ -76,7 +73,7 @@ public class Show extends JPanel {
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
         JLabel answer = new JLabel("", SwingConstants.CENTER);
-        answer.setVisible(true);
+        answer.setText(list.get(0).getAnswer());
         gridbag.setConstraints(answer, c);
         add(answer);
         
@@ -89,14 +86,11 @@ public class Show extends JPanel {
         gridbag.setConstraints(userInput, c);
         add(userInput);
         
-        addListeners(easy, medium, hard, question, answer, userInput, swap, list);
-    }
-    
-    protected void addListeners(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, JTextField userInput, 
-                                UISwapInterface swap, ArrayList<Element> list) {
         ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, list);
         easy.addActionListener(listener);
         medium.addActionListener(listener);
         hard.addActionListener(listener);
+        
+        System.out.println("SHOW: " + "Q: " + question.isVisible() + "A:" + answer.isVisible());
     }
 }

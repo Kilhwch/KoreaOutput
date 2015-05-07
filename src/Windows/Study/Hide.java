@@ -24,10 +24,7 @@ public class Hide extends JPanel {
     public Hide(UISwapInterface swap, ArrayList<Element> list) {
         this.swap = swap;
         this.list = list;
-        init(list);
-    }
-    
-    private void init(ArrayList<Element> list) {
+        
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -47,6 +44,7 @@ public class Hide extends JPanel {
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
         gridbag.setConstraints(question, c);
+        question.setText(list.get(0).getQuestion());
         add(question);
         
         c.gridx = 6;
@@ -73,12 +71,10 @@ public class Hide extends JPanel {
         gridbag.setConstraints(userInput, c);
         add(userInput); 
         
-        addListeners(check, question, answer, userInput, list);
-    }
-    
-    protected void addListeners(JButton check, JLabel question, JLabel answer, JTextField userInput, 
-                                ArrayList<Element> list) {
         ActionListener listener = new ShowListener(swap, check, question, answer, userInput, list);
         check.addActionListener(listener);
+        
+        System.out.println("HIDE: " + "Q: " + question.isVisible() + "A:" + answer.isVisible());
     }
+   
 }

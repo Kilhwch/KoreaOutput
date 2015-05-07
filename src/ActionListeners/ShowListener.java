@@ -20,7 +20,7 @@ import javax.swing.JTextField;
  */
 public class ShowListener extends AbstractAction {
 
-    private int index = 0;
+    private int index = 1;
     private ArrayList<Element> list;
     private JButton check;
     private JLabel question, answer;
