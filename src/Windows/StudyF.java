@@ -23,7 +23,7 @@ public class StudyF extends JFrame implements UISwapInterface {
     private static final String SHOW = "show";
     private static final String HIDE = "hide";
     private String fName;
-    final CardLayout cards = new CardLayout();
+    CardLayout cards = new CardLayout();
     
     public ArrayList<Element> list;
 
@@ -39,8 +39,9 @@ public class StudyF extends JFrame implements UISwapInterface {
 
     public void windowInit() {
         setLayout(cards);
-        Hide hide = new Hide(StudyF.this, list);
-        Show show = new Show(StudyF.this, list);
+        Hide hide = new Hide(this, list);
+        Show show = new Show(this, list);
+        
         add(hide, HIDE);
         add(show, SHOW);
         

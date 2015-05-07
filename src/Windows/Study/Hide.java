@@ -5,14 +5,10 @@ import ActionListeners.ShowListener;
 import Elements.Element;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -21,13 +17,9 @@ import javax.swing.SwingConstants;
 
 public class Hide extends JPanel {
 
-    private static final String SHOW = "show";
-    private UISwapInterface swap;
+    public UISwapInterface swap;
+    public static final String SHOW = "show";
     public ArrayList<Element> list;
-    
-    
-    public Hide() {
-    }
 
     public Hide(UISwapInterface swap, ArrayList<Element> list) {
         this.swap = swap;
@@ -35,7 +27,7 @@ public class Hide extends JPanel {
         init(list);
     }
     
-    public void init(final ArrayList<Element> list) {
+    private void init(ArrayList<Element> list) {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -47,7 +39,6 @@ public class Hide extends JPanel {
         c.gridx = 6; 
         c.gridy = 5;
         JButton check = new JButton("Check");
-        
         gridbag.setConstraints(check, c);
         add(check);
 
@@ -55,7 +46,6 @@ public class Hide extends JPanel {
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
-        question.setText(list.get(0).getQuestion());
         gridbag.setConstraints(question, c);
         add(question);
         
@@ -69,8 +59,7 @@ public class Hide extends JPanel {
         c.gridx = 6;
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
-        final JLabel answer = new JLabel("", SwingConstants.CENTER);
-        answer.setText(list.get(0).getAnswer());
+        JLabel answer = new JLabel("", SwingConstants.CENTER);
         answer.setVisible(false);
         gridbag.setConstraints(answer, c);
         add(answer);
@@ -84,11 +73,12 @@ public class Hide extends JPanel {
         gridbag.setConstraints(userInput, c);
         add(userInput); 
         
-        addListeners(check, swap);
+        addListeners(check, question, answer, userInput, list);
     }
     
-    protected void addListeners(JButton check, UISwapInterface swap) {
-        ActionListener listener = new ShowListener(check, swap);
+    protected void addListeners(JButton check, JLabel question, JLabel answer, JTextField userInput, 
+                                ArrayList<Element> list) {
+        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, list);
         check.addActionListener(listener);
     }
 }

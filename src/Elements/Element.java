@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 public class Element {
 
-    private final String question, answer;
+    private String question, answer;
     private LocalDate date;
     private final Due due;
     

@@ -3,23 +3,15 @@ package Windows.Study;
 
 import ActionListeners.HideListener;
 import Elements.Element;
-import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 
 
@@ -36,7 +28,7 @@ public class Show extends JPanel {
         init(list);
     }
     
-    public void init(final ArrayList<Element> list) {
+    public void init(ArrayList<Element> list) {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -69,7 +61,6 @@ public class Show extends JPanel {
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
-        question.setText(list.get(0).getQuestion());
         gridbag.setConstraints(question, c);
         add(question);
         
@@ -84,8 +75,7 @@ public class Show extends JPanel {
         c.gridx = 5; 
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
-        final JLabel answer = new JLabel("", SwingConstants.CENTER);
-        answer.setText(list.get(0).getAnswer());
+        JLabel answer = new JLabel("", SwingConstants.CENTER);
         answer.setVisible(true);
         gridbag.setConstraints(answer, c);
         add(answer);
@@ -99,11 +89,12 @@ public class Show extends JPanel {
         gridbag.setConstraints(userInput, c);
         add(userInput);
         
-        addListeners(easy, medium, hard, swap);
+        addListeners(easy, medium, hard, question, answer, userInput, swap, list);
     }
     
-    protected void addListeners(JButton easy, JButton medium, JButton hard, UISwapInterface swap) {
-        ActionListener listener = new HideListener(easy, medium, hard, swap);
+    protected void addListeners(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, JTextField userInput, 
+                                UISwapInterface swap, ArrayList<Element> list) {
+        ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, list);
         easy.addActionListener(listener);
         medium.addActionListener(listener);
         hard.addActionListener(listener);

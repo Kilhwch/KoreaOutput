@@ -5,21 +5,34 @@
  */
 package ActionListeners;
 
+import Elements.Element;
 import Windows.Study.UISwapInterface;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class HideListener extends AbstractAction {
 
-    private final JButton easy, medium, hard;
     public UISwapInterface swap;
+    private ArrayList<Element> list;
+    private JButton easy, medium, hard;
+    private JLabel question, answer;
+    private JTextField userInput;
+    private int index = 0;
     
-    public HideListener(JButton easy, JButton medium, JButton hard, UISwapInterface swap) {
-        this.easy = easy; 
-        this.medium = medium; 
-        this.hard = hard; 
+    public HideListener(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, 
+            JTextField userInput, UISwapInterface swap, ArrayList<Element> list) {
+        this.easy = easy;
+        this.medium = medium;
+        this.hard = hard;
+        this.question = question;
+        this.answer = answer;
+        this.userInput = userInput;
         this.swap = swap;
+        this.list = list;
     }
     
     private enum Actions {
@@ -29,15 +42,31 @@ public class HideListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Easy.name())) {
-            swap.swapView("hide");
+            if (hasNext()) swap.swapView("hide");
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
-            swap.swapView("hide");
+            if (hasNext()) swap.swapView("hide");
         }
         
         else {
-            swap.swapView("hide");
+            if (hasNext()) swap.swapView("hide");
+            
+        }
+        showQuestion();
+    }
+    
+    private boolean hasNext() {
+        return index < list.size();
+    }
+    
+    private void showQuestion() {
+        if (hasNext()) {
+            question.setText(list.get(index).getQuestion());
+            answer.setText(list.get(index).getAnswer());
+            index++;
+        } else {
+            System.exit(0);
         }
     }
 }
