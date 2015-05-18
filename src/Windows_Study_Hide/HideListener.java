@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ActionListeners;
+package Windows_Study_Hide;
 
 import Elements.Element;
-import Windows.Study.UISwapInterface;
+import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;

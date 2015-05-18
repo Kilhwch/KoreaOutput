@@ -1,5 +1,5 @@
 
-package Windows.Study;
+package Windows_Submenus;
 
 import ActionListeners.MenuListener;
 import java.awt.event.ActionListener;

@@ -1,5 +1,5 @@
 
-package Windows.Study;
+package Windows_Study;
 
 public interface UISwapInterface {
     

@@ -1,9 +1,9 @@
 
-package Windows.Study;
+package Windows_Study_Show;
 
-import ActionListeners.ShowListener;
+import Windows_Study_Hide.HideListener;
 import Elements.Element;
-import java.awt.Dimension;
+import Windows_Study.UISwapInterface;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
@@ -16,12 +16,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
-public class Hide extends JPanel {
+public class Show extends JPanel {
 
     private UISwapInterface swap;
+    
     private ArrayList<Element> list;
 
-    public Hide(UISwapInterface swap, ArrayList<Element> list) {
+    public Show(UISwapInterface swap, ArrayList<Element> list) {
         this.swap = swap;
         this.list = list;
         
@@ -31,16 +32,31 @@ public class Hide extends JPanel {
         
         c.weightx = 4;
         c.weighty = 4;
-        c.anchor = GridBagConstraints.SOUTH;
-        c.gridx = 6; 
-        c.gridy = 5;
-        JButton check = new JButton("Check");
-        check.setPreferredSize(new Dimension(300, 30));
-        gridbag.setConstraints(check, c);
-        add(check);
-
+        
+        c.ipady = 8;
+        c.anchor = GridBagConstraints.LAST_LINE_START;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 6; 
+        c.gridy = 5;
+        JButton easy = new JButton("Easy");
+        gridbag.setConstraints(easy, c);
+        add(easy);
+        
+        
+        c.gridx = 5; 
+        c.gridy = 5;
+        JButton medium = new JButton("Medium");
+        gridbag.setConstraints(medium, c);
+        add(medium);
+        
+        c.gridx = 4; 
+        c.gridy = 5;
+        JButton hard = new JButton("Hard");
+        gridbag.setConstraints(hard, c);
+        add(hard);
+        
+        c.ipady = 0;
+        c.gridx = 5; 
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
@@ -48,33 +64,34 @@ public class Hide extends JPanel {
         question.setText(list.get(0).getQuestion());
         add(question);
         
-        c.gridx = 6;
+        c.gridwidth = 3;
+        c.gridx = 4; 
         c.gridy = 4;
         c.anchor = GridBagConstraints.CENTER;
         JSeparator separator = new JSeparator(SwingConstants.HORIZONTAL);
         gridbag.setConstraints(separator, c);
         add(separator);
         
-        c.gridx = 6;
+        c.gridx = 4; 
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
         JLabel answer = new JLabel("", SwingConstants.CENTER);
-        answer.setVisible(false);
+        answer.setText(list.get(0).getAnswer());
         gridbag.setConstraints(answer, c);
         add(answer);
         
-        c.fill = GridBagConstraints.RELATIVE;
-        c.ipady = 15;
-        c.ipadx = 300;
-        c.gridwidth = 2;
-        c.gridx = 6;
+        c.gridwidth = 1;
+        c.gridx = 5; 
         c.gridy = 5;
         c.anchor = GridBagConstraints.CENTER;
         JTextField userInput = new JTextField();
         gridbag.setConstraints(userInput, c);
-        add(userInput); 
+        userInput.setVisible(false);
+        add(userInput);
         
-        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, list);
-        check.addActionListener(listener);
+        ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, list);
+        easy.addActionListener(listener);
+        medium.addActionListener(listener);
+        hard.addActionListener(listener);
     }
 }

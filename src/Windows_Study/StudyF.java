@@ -1,11 +1,11 @@
-package Windows;
+package Windows_Study;
 
-import Windows.Study.UISwapInterface;
-import Windows.Study.Show;
-import Windows.Study.Hide;
+import Windows_Study.UISwapInterface;
+import Windows_Study_Show.Show;
+import Windows_Study_Hide.Hide;
 import Elements.Element;
 import Files.FileParser;
-import Windows.Study.Menu;
+import Windows_Submenus.Menu;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.text.ParseException;
