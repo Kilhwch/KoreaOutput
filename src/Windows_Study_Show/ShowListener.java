@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Windows_Study_Show;
 
 import Elements.Element;
+import Windows_Study.StudyF;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -20,7 +16,6 @@ import javax.swing.JTextField;
  */
 public class ShowListener extends AbstractAction {
 
-    private int index = 1;
     private ArrayList<Element> list;
     private JButton check;
     private JLabel question, answer;
@@ -52,13 +47,15 @@ public class ShowListener extends AbstractAction {
     
     
     private void showAnswer() {
+        StudyF.index++;
         if (hasNext()) {
-            question.setText(list.get(index).getQuestion());
-            index++;
+            question.setText(list.get(StudyF.index).getQuestion());
+            answer.setText(list.get(StudyF.index).getAnswer());
+            userInput.setVisible(true);
         }
     }
     
     private boolean hasNext() {
-        return index < list.size();
+        return StudyF.index < list.size();
     }
 }

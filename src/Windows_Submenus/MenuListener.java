@@ -1,6 +1,7 @@
+package Windows_Submenus;
 
-package ActionListeners;
-
+import Files.FileUpdater;
+import Windows_Study.StudyF;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
@@ -31,7 +32,8 @@ public class MenuListener extends AbstractAction {
         }
         
         else {
-            // update files before closing here
+            FileUpdater file = new FileUpdater(StudyF.fName);
+            file.update(StudyF.list);
             System.exit(0);
         }
     }

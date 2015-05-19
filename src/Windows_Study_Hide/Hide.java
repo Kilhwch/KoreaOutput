@@ -3,6 +3,7 @@ package Windows_Study_Hide;
 
 import Windows_Study_Show.ShowListener;
 import Elements.Element;
+import Windows_Study.StudyF;
 import Windows_Study.UISwapInterface;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -46,7 +47,18 @@ public class Hide extends JPanel {
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
         gridbag.setConstraints(question, c);
-        question.setText(list.get(0).getQuestion());
+        // first question
+        
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(StudyF.index).isReviewable()) {
+                question.setText(list.get(StudyF.index).getQuestion());
+                break;
+            }
+            else {
+                StudyF.index++;
+            }
+        }
+
         add(question);
         
         c.gridx = 6;

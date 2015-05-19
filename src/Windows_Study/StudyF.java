@@ -1,10 +1,9 @@
 package Windows_Study;
 
-import Windows_Study.UISwapInterface;
 import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
 import Elements.Element;
-import Files.FileParser;
+import Files.FileOpener;
 import Windows_Submenus.Menu;
 import java.awt.CardLayout;
 import java.io.IOException;
@@ -22,14 +21,15 @@ public class StudyF extends JFrame implements UISwapInterface {
     protected static final String ICONPATH = "./Files/Icons/main.jpg";
     private static final String SHOW = "show";
     private static final String HIDE = "hide";
-    private String fName;
+    public static String fName;
+    public static int index = 0;
     CardLayout cards = new CardLayout();
     
-    public ArrayList<Element> list;
+    public static ArrayList<Element> list;
 
     public StudyF(String fName) {
         this.fName = fName;
-        FileParser file = new FileParser(fName);
+        FileOpener file = new FileOpener(fName);
         try {
             list = file.loadFile();
         } catch (IOException | ParseException ex) {

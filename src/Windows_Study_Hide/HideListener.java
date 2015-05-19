@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Windows_Study_Hide;
 
 import Elements.Element;
+import Files.FileUpdater;
+import Windows_Study.StudyF;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -21,7 +18,6 @@ public class HideListener extends AbstractAction {
     private JButton easy, medium, hard;
     private JLabel question, answer;
     private JTextField userInput;
-    private int index = 1;
     
     public HideListener(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, 
             JTextField userInput, UISwapInterface swap, ArrayList<Element> list) {
@@ -42,14 +38,17 @@ public class HideListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Easy.name())) {
+            list.get(StudyF.index).calculateDue("easy");
             if (hasNext()) swap.swapView("hide");
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
+            list.get(StudyF.index).calculateDue("medium");
             if (hasNext()) swap.swapView("hide");
         }
         
         else {
+            list.get(StudyF.index).calculateDue("hard");
             if (hasNext()) swap.swapView("hide");
             
         }
@@ -57,16 +56,22 @@ public class HideListener extends AbstractAction {
     }
     
     private boolean hasNext() {
-        return index < list.size();
+        return StudyF.index < list.size();
     }
     
     private void showQuestion() {
         if (hasNext()) {
-            question.setText(list.get(index).getQuestion());
-            answer.setText(list.get(index).getAnswer());
-            userInput.setVisible(false);
-            index++;
+            if (list.get(StudyF.index).isReviewable()) {
+                question.setText(list.get(StudyF.index).getQuestion());
+                answer.setText(list.get(StudyF.index).getAnswer());
+                userInput.setVisible(false);
+            } else {
+                showQuestion();
+            }
+                
         } else {
+            FileUpdater file = new FileUpdater(StudyF.fName);
+            file.update(StudyF.list);
             System.exit(0);
         }
     }

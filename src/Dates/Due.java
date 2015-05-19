@@ -23,12 +23,14 @@ public class Due {
     }
 
     private long easy() {
-        currentDue *= 6;
+        if (currentDue == 0) currentDue += 6;
+        else currentDue *= 6;
         return currentDue;
     }
         
     private long medium() {
-        currentDue *= 3;
+        if (currentDue == 0) currentDue += 3;
+        else currentDue *= 3;
         return currentDue;
     }
 
