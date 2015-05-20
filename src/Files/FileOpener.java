@@ -46,6 +46,7 @@ public class FileOpener {
                 // add Elements to list with dates that are in the past
                 if (date.isBefore(current) || date.isEqual(current)) {
                     ele.setReviewable(true);
+                    ele.setDate(current);
                 }
                 
                 else { 

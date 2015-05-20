@@ -1,6 +1,7 @@
 package Windows_Study_Show;
 
 import Elements.Element;
+import Files.FileUpdater;
 import Windows_Study.StudyF;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
@@ -41,21 +42,33 @@ public class ShowListener extends AbstractAction {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Check.name())) {
             swap.swapView("show");
-            showAnswer();
+            showQuestion();
         }
     }
     
-    
-    private void showAnswer() {
-        StudyF.index++;
-        if (hasNext()) {
-            question.setText(list.get(StudyF.index).getQuestion());
-            answer.setText(list.get(StudyF.index).getAnswer());
-            userInput.setVisible(true);
+    private void showQuestion() {
+        while (true) {
+            ++StudyF.index;
+            if (hasNext()) {
+                if (list.get(StudyF.index).isReviewable()) {
+                    question.setText(list.get(StudyF.index).getQuestion());
+                    answer.setText(list.get(StudyF.index).getAnswer());
+                    answer.setVisible(false);
+                    userInput.setVisible(true);
+                    break;
+                }
+            }
+            else close();
         }
     }
     
     private boolean hasNext() {
         return StudyF.index < list.size();
+    }
+    
+    private void close() {
+        FileUpdater file = new FileUpdater(StudyF.fName);
+        file.update(StudyF.list);
+        System.exit(0);
     }
 }

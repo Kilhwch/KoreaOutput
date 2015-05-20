@@ -38,41 +38,32 @@ public class HideListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Easy.name())) {
-            list.get(StudyF.index).calculateDue("easy");
-            if (hasNext()) swap.swapView("hide");
+            System.out.println("Updating due: " + list.get(StudyF.index-1).getQuestion());
+            list.get(StudyF.index-1).calculateDue("easy");
+            showAnswer();
+            swap.swapView("hide");
+            
+            
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
             list.get(StudyF.index).calculateDue("medium");
-            if (hasNext()) swap.swapView("hide");
-        }
-        
-        else {
-            list.get(StudyF.index).calculateDue("hard");
-            if (hasNext()) swap.swapView("hide");
+            showAnswer();
+            swap.swapView("hide");
             
         }
-        showQuestion();
-    }
-    
-    private boolean hasNext() {
-        return StudyF.index < list.size();
-    }
-    
-    private void showQuestion() {
-        if (hasNext()) {
-            if (list.get(StudyF.index).isReviewable()) {
-                question.setText(list.get(StudyF.index).getQuestion());
-                answer.setText(list.get(StudyF.index).getAnswer());
-                userInput.setVisible(false);
-            } else {
-                showQuestion();
-            }
-                
-        } else {
-            FileUpdater file = new FileUpdater(StudyF.fName);
-            file.update(StudyF.list);
-            System.exit(0);
+        
+        else if (e.getActionCommand().equals(Actions.Hard.name())) {
+            list.get(StudyF.index).calculateDue("hard");
+            showAnswer();
+            swap.swapView("hide");
         }
+    }
+    
+    private void showAnswer() {
+        question.setText(list.get(StudyF.index).getQuestion());
+        answer.setText(list.get(StudyF.index).getAnswer());
+        answer.setVisible(true);
+        userInput.setVisible(false);
     }
 }
