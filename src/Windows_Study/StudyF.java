@@ -4,7 +4,7 @@ import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
 import Elements.Element;
 import Files.FileOpener;
-import Windows_Submenus.Menu;
+import Windows_Submenus.StudyMenu;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.text.ParseException;
@@ -45,7 +45,7 @@ public class StudyF extends JFrame implements UISwapInterface {
         add(hide, HIDE);
         add(show, SHOW);
         
-        JMenuBar menu = new Menu();
+        JMenuBar menu = new StudyMenu();
         setJMenuBar(menu);
         
         setTitle(fName);

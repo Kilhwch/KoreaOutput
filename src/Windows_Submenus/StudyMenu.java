@@ -8,8 +8,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-public class Menu extends JMenuBar {
-    public Menu() {
+public class StudyMenu extends JMenuBar {
+    public StudyMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
 
@@ -33,7 +33,7 @@ public class Menu extends JMenuBar {
     }
 
     protected void addListeners(JMenuItem menuAdd, JMenuItem menuDel, JMenuItem menuExit) {
-        ActionListener listener = new MenuListener(menuAdd, menuDel, menuExit);
+        ActionListener listener = new StudyMenuListener(menuAdd, menuDel, menuExit);
         menuAdd.addActionListener(listener);
         menuDel.addActionListener(listener);
         menuExit.addActionListener(listener);

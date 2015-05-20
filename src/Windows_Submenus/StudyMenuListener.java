@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 
-public class MenuListener extends AbstractAction {
+public class StudyMenuListener extends AbstractAction {
     
     JMenuItem menuAdd, menuDel, menuExit;
     
-    public MenuListener(JMenuItem menuAdd, JMenuItem menuDel, JMenuItem menuExit) {
+    public StudyMenuListener(JMenuItem menuAdd, JMenuItem menuDel, JMenuItem menuExit) {
         this.menuAdd = menuAdd;
         this.menuDel = menuDel;
         this.menuExit = menuExit;

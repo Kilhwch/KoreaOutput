@@ -2,9 +2,11 @@ package Windows;
 
 import Files.FileNames;
 import Windows_Study.StudyF;
+import Windows_Submenus.MainMenu;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -13,8 +15,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -33,6 +38,8 @@ public class MainF extends JPanel {
         JPanel pane = new MainF(frame);
         frame.add("Center", pane);
         
+        JMenuBar menu = new MainMenu();
+        frame.setJMenuBar(menu);
         ImageIcon icon = new ImageIcon(ICONPATH);
         frame.setIconImage(icon.getImage());
         frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -47,11 +54,29 @@ public class MainF extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
         
-        c.anchor = GridBagConstraints.CENTER;
+        c.insets = new Insets(0, 0, 30, 0);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JSeparator top = new JSeparator(JSeparator.HORIZONTAL);
         c.gridx = 1;
         c.gridy = 1;
+        gridbag.setConstraints(top, c);
+        add(top);
         
         
+        
+        c.fill = GridBagConstraints.NONE;
+        c.anchor = GridBagConstraints.PAGE_START;
+        c.gridx = 1;
+        c.gridy = 2;
+        JLabel label = new JLabel("Choose a file: ");
+        gridbag.setConstraints(label, c);
+        add(label);
+        
+        c.insets = new Insets(10, 0, 10, 0);
+        c.anchor = GridBagConstraints.CENTER;
+        c.gridx = 1;
+        c.gridy = 3;
+
         DefaultListModel model = new DefaultListModel();
         final File[] files = new FileNames().getAll();
         
@@ -72,12 +97,20 @@ public class MainF extends JPanel {
         add(list);
         
         JButton start = new JButton("Start");
-        c.anchor = GridBagConstraints.PAGE_END;
+        c.anchor = GridBagConstraints.CENTER;
         c.gridx = 1;
-        c.gridy = 2;
+        c.gridy = 4;
         gridbag.setConstraints(start, c);
         add(start);
         
+        c.insets = new Insets(30, 0, 0, 0);
+        c.anchor = GridBagConstraints.PAGE_END;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        JSeparator bottom = new JSeparator(JSeparator.HORIZONTAL);
+        c.gridx = 1;
+        c.gridy = 5;
+        gridbag.setConstraints(bottom, c);
+        add(bottom);
         
         start.addActionListener(new ActionListener() {
             @Override
@@ -91,7 +124,3 @@ public class MainF extends JPanel {
         });
     }
 }
-
-// Next time: 1. Make the main menu with dropdown submenus (import file, exit)
-//            2. Make a list of all the items @ /Files and load them when the
-//               program is launched

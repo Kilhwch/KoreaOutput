@@ -1,4 +1,3 @@
-
 package Files;
 
 import Elements.Element;
@@ -22,7 +21,6 @@ public class FileUpdater {
     }
     
         public void update(ArrayList<Element> list) {
-        System.out.println("updating file");
         try {
             File file = new File(PATH + fName);
             File temp = new File(PATH + "tmp.txt");
