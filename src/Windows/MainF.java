@@ -1,5 +1,6 @@
 package Windows;
 
+import Constants.C;
 import Files.FileNames;
 import Windows_Study.StudyF;
 import Windows_Submenus.MainMenu;
@@ -26,23 +27,19 @@ import javax.swing.border.LineBorder;
 
 public class MainF extends JPanel {
 
-    protected static final int _TXT = 4;
-    protected static final int WINDOW_WIDTH = 500;
-    protected static final int WINDOW_HEIGHT = 500;
-    protected static final String ICONPATH = "./Files/Icons/main.jpg";
-    protected static final String TITLE = "KoreaOutput";
+
     
     
     public static void main(String[] args) {
-        final JFrame frame = new JFrame(TITLE);
+        final JFrame frame = new JFrame(C.TITLE);
         JPanel pane = new MainF(frame);
         frame.add("Center", pane);
         
         JMenuBar menu = new MainMenu();
         frame.setJMenuBar(menu);
-        ImageIcon icon = new ImageIcon(ICONPATH);
+        ImageIcon icon = new ImageIcon(C.ICONPATH);
         frame.setIconImage(icon.getImage());
-        frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        frame.setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
@@ -81,7 +78,7 @@ public class MainF extends JPanel {
         final File[] files = new FileNames().getAll();
         
         for (File file : files) {
-            model.addElement(file.getName().substring(0, file.getName().length() - _TXT));
+            model.addElement(file.getName().substring(0, file.getName().length() - C._TXT));
         }
         
         final JList list = new JList(model);

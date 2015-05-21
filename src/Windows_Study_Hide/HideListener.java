@@ -1,8 +1,7 @@
 package Windows_Study_Hide;
 
+import Constants.C;
 import Elements.Element;
-import Files.FileUpdater;
-import Windows_Study.StudyF;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -38,31 +37,27 @@ public class HideListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Easy.name())) {
-            System.out.println("Updating due: " + list.get(StudyF.index-1).getQuestion());
-            list.get(StudyF.index-1).calculateDue("easy");
-            showAnswer();
-            swap.swapView("hide");
-            
-            
+            list.get(C.INDEX-1).calculateDue("easy");
+            setFields();
+            swap.swapView(C.HIDE);
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
-            list.get(StudyF.index).calculateDue("medium");
-            showAnswer();
-            swap.swapView("hide");
-            
+            list.get(C.INDEX-1).calculateDue("medium");
+            setFields();
+            swap.swapView(C.HIDE);
         }
         
         else if (e.getActionCommand().equals(Actions.Hard.name())) {
-            list.get(StudyF.index).calculateDue("hard");
-            showAnswer();
-            swap.swapView("hide");
+            list.get(C.INDEX-1).calculateDue("hard");
+            setFields();
+            swap.swapView(C.HIDE);
         }
     }
     
-    private void showAnswer() {
-        question.setText(list.get(StudyF.index).getQuestion());
-        answer.setText(list.get(StudyF.index).getAnswer());
+    private void setFields() {
+        question.setText(list.get(C.INDEX).getQuestion());
+        answer.setText(list.get(C.INDEX).getAnswer());
         answer.setVisible(true);
         userInput.setVisible(false);
     }

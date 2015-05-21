@@ -1,27 +1,31 @@
 package Windows;
 
 
+import Constants.C;
+import Files.StatsReader;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
 public class Stats extends JFrame {
 
-    protected static final int WINDOW_WIDTH = 500;
-    protected static final int WINDOW_HEIGHT = 500;
 
     public Stats() {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
         setTitle("Statistics");
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
     }
 
-    public void open() {
+    public void open() throws IOException {
+        
+        StatsReader stats = new StatsReader();
+        stats.readStats();
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -39,17 +43,16 @@ public class Stats extends JFrame {
         c.gridx = 1;
         c.gridy = 2;
         JLabel reviewed = new JLabel();
-        reviewed.setText("Items reviewed: file.readCount");
+        reviewed.setText(C.REVIEWED + stats.getReviewed());
         gridbag.setConstraints(reviewed, c);
         add(reviewed);
         
         c.gridx = 1;
         c.gridy = 3;
-        JLabel deleted = new JLabel();
-        deleted.setText("Items deleted: file.readCount");
-        gridbag.setConstraints(deleted, c);
-        add(deleted);
-        
+        JLabel memorized = new JLabel();
+        memorized.setText(C.MEMORIZED + stats.getMemorized());
+        gridbag.setConstraints(memorized, c);
+        add(memorized);
         
         
         c.insets = new Insets(30, 0, 0, 0);

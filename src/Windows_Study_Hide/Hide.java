@@ -1,9 +1,9 @@
 
 package Windows_Study_Hide;
 
+import Constants.C;
 import Windows_Study_Show.ShowListener;
 import Elements.Element;
-import Windows_Study.StudyF;
 import Windows_Study.UISwapInterface;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -50,12 +50,12 @@ public class Hide extends JPanel {
         // first question
         
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(StudyF.index).isReviewable()) {
-                question.setText(list.get(StudyF.index).getQuestion());
+            if (list.get(C.INDEX).isReviewable()) {
+                question.setText(list.get(C.INDEX).getQuestion());
                 break;
             }
             else {
-                StudyF.index++;
+                C.INDEX++;
             }
         }
 

@@ -3,8 +3,6 @@ package Dates;
 
 
 public class Due {
-
-    private int currentDue = 0;
     
     public Due() {
     
@@ -23,19 +21,14 @@ public class Due {
     }
 
     private long easy() {
-        if (currentDue == 0) currentDue += 6;
-        else currentDue *= 6;
-        return currentDue;
+        return 6;
     }
         
     private long medium() {
-        if (currentDue == 0) currentDue += 3;
-        else currentDue *= 3;
-        return currentDue;
+        return 3;
     }
 
     private long hard() {
-        currentDue = 0;
-        return currentDue;
+        return 0;
     }
 }

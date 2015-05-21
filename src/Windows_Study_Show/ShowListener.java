@@ -1,5 +1,6 @@
 package Windows_Study_Show;
 
+import Constants.C;
 import Elements.Element;
 import Files.FileUpdater;
 import Windows_Study.StudyF;
@@ -11,10 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author kasper
- */
+
 public class ShowListener extends AbstractAction {
 
     private ArrayList<Element> list;
@@ -41,29 +39,38 @@ public class ShowListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Check.name())) {
-            swap.swapView("show");
-            showQuestion();
+            swap.swapView(C.SHOW);
+            setFields();
         }
     }
     
-    private void showQuestion() {
+    private void setFields() {
         while (true) {
-            ++StudyF.index;
-            if (hasNext()) {
-                if (list.get(StudyF.index).isReviewable()) {
-                    question.setText(list.get(StudyF.index).getQuestion());
-                    answer.setText(list.get(StudyF.index).getAnswer());
-                    answer.setVisible(false);
-                    userInput.setVisible(true);
-                    break;
+            if (!lastItem()) {
+                ++C.INDEX;
+                if (hasNext()) {
+                    if (list.get(C.INDEX).isReviewable()) {
+                        question.setText(list.get(C.INDEX).getQuestion());
+                        answer.setText(list.get(C.INDEX).getAnswer());
+                        answer.setVisible(false);
+                        userInput.setVisible(true);
+                        break;
+                    }
                 }
+            } else {
+                // show complete window or break so the user sees the last answer
+                // last items date is not also updated
+                close();
             }
-            else close();
         }
     }
     
     private boolean hasNext() {
-        return StudyF.index < list.size();
+        return C.INDEX < list.size();
+    }
+    
+    private boolean lastItem() {
+        return C.INDEX+1 == list.size();
     }
     
     private void close() {

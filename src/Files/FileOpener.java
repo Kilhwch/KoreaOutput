@@ -1,4 +1,5 @@
 package Files;
+import Constants.C;
 import Elements.Element;
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 public class FileOpener {
 
     private final String fName;
-    private final String PATH = "./Files/Items/";
     private ArrayList<Element> list;
 
     public FileOpener(String title) {
@@ -29,7 +29,7 @@ public class FileOpener {
     public ArrayList<Element> loadFile() throws FileNotFoundException, IOException, ParseException {
         if (fileExists()) {
             if (fileNotEmpty()) {
-                BufferedReader br = new BufferedReader(new FileReader(new File(PATH + fName)));
+                BufferedReader br = new BufferedReader(new FileReader(new File(C.ITEMSPATH + fName)));
                 String line;
 
                 LocalDate current = LocalDate.now();
@@ -64,12 +64,12 @@ public class FileOpener {
     }
 
     private boolean fileExists() {
-        File file = new File(PATH + fName);
+        File file = new File(C.ITEMSPATH + fName);
         return file.exists();
     }
     
     private boolean fileNotEmpty() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader(new File(PATH + fName)));
+        BufferedReader br = new BufferedReader(new FileReader(new File(C.ITEMSPATH + fName)));
         if (br.readLine() != null) {
             br.close();
             return true;

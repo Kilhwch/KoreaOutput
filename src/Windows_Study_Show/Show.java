@@ -1,9 +1,9 @@
 
 package Windows_Study_Show;
 
+import Constants.C;
 import Windows_Study_Hide.HideListener;
-import Elements.Element;
-import Windows_Study.StudyF;
+import Elements.Element;    
 import Windows_Study.UISwapInterface;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -64,12 +64,12 @@ public class Show extends JPanel {
         gridbag.setConstraints(question, c);
         
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(StudyF.index).isReviewable()) {
-                question.setText(list.get(StudyF.index).getQuestion());
+            if (list.get(C.INDEX).isReviewable()) {
+                question.setText(list.get(C.INDEX).getQuestion());
                 break;
             }
             else {
-                StudyF.index++;
+                C.INDEX++;
             }
         }
         add(question);
@@ -88,12 +88,12 @@ public class Show extends JPanel {
         JLabel answer = new JLabel("", SwingConstants.CENTER);
         
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(StudyF.index).isReviewable()) {
-                answer.setText(list.get(StudyF.index).getAnswer());
+            if (list.get(C.INDEX).isReviewable()) {
+                answer.setText(list.get(C.INDEX).getAnswer());
                 break;
             }
             else {
-                StudyF.index++;
+                C.INDEX++;
             }
         }
         

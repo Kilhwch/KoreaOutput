@@ -1,5 +1,6 @@
 package Windows_Study;
 
+import Constants.C;
 import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
 import Elements.Element;
@@ -16,13 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
 public class StudyF extends JFrame implements UISwapInterface {
-    protected static int WINDOW_WIDTH = 500;
-    protected static int WINDOW_HEIGHT = 500;
-    protected static final String ICONPATH = "./Files/Icons/main.jpg";
-    private static final String SHOW = "show";
-    private static final String HIDE = "hide";
+
     public static String fName;
-    public static int index = 0;
     CardLayout cards = new CardLayout();
     
     public static ArrayList<Element> list;
@@ -42,16 +38,16 @@ public class StudyF extends JFrame implements UISwapInterface {
         Hide hide = new Hide(this, list);
         Show show = new Show(this, list);
         
-        add(hide, HIDE);
-        add(show, SHOW);
+        add(hide, C.HIDE);
+        add(show, C.SHOW);
         
         JMenuBar menu = new StudyMenu();
         setJMenuBar(menu);
         
         setTitle(fName);
-        ImageIcon icon = new ImageIcon(ICONPATH);
+        ImageIcon icon = new ImageIcon(C.ICONPATH);
         setIconImage(icon.getImage());
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);

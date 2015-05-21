@@ -4,6 +4,9 @@ package Windows_Submenus;
 import Windows.Stats;
 import Windows.Help;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 
@@ -25,7 +28,11 @@ public class MainMenuListener extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(Actions.Statistics.name())) {
-            new Stats().open();
+            try {
+                new Stats().open();
+            } catch (IOException ex) {
+                Logger.getLogger(MainMenuListener.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }
         

@@ -1,17 +1,14 @@
 
 package Windows;
 
+import Constants.C;
 import javax.swing.JFrame;
 
 
 public class Help extends JFrame {
-
-    protected static final int WINDOW_WIDTH = 500;
-    protected static final int WINDOW_HEIGHT = 500;
-    
     
     public Help() {
-        setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
         setTitle("Help");
         setLocationRelativeTo(null);
         setResizable(true);
