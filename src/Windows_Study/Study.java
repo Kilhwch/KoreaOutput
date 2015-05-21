@@ -18,6 +18,7 @@ import javax.swing.JMenuBar;
 
 public class Study extends JFrame implements UISwapInterface {
 
+    public static boolean HIDEON = false;
     public static int memorized, reviewed, index = 0;
     public static String fName;
     private CardLayout cards = new CardLayout();
@@ -41,7 +42,7 @@ public class Study extends JFrame implements UISwapInterface {
         add(hide, C.HIDE);
         add(show, C.SHOW);
         
-        JMenuBar menu = new StudyMenu();
+        JMenuBar menu = new StudyMenu(this);
         setJMenuBar(menu);
         
         setTitle(fName);
@@ -55,6 +56,12 @@ public class Study extends JFrame implements UISwapInterface {
     
     @Override
     public void swapView(String view) {
+        if (view.equals(C.HIDE)) {
+            HIDEON = true;
+        }
+        else {
+            HIDEON = false;
+        }
         cards.show(getContentPane(), view);
     }
 }

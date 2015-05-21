@@ -1,6 +1,7 @@
 
 package Windows_Submenus;
 
+import Windows_Study.UISwapInterface;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
@@ -9,7 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 public class StudyMenu extends JMenuBar {
-    public StudyMenu() {
+    public StudyMenu(UISwapInterface swap) {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Menu");
 
@@ -18,7 +19,6 @@ public class StudyMenu extends JMenuBar {
         menuAdd.setEnabled(false);
         JMenuItem menuDel = new JMenuItem("Delete", KeyEvent.VK_DELETE);
         menuDel.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
-        menuDel.setEnabled(false);
         JMenuItem menuExit = new JMenuItem("Exit", KeyEvent.VK_E);
         menuExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
         
@@ -29,11 +29,11 @@ public class StudyMenu extends JMenuBar {
         
         add(menuBar);
         
-        addListeners(menuAdd, menuDel, menuExit);
+        addListeners(menuAdd, menuDel, menuExit, swap);
     }
 
-    protected void addListeners(JMenuItem menuAdd, JMenuItem menuDel, JMenuItem menuExit) {
-        ActionListener listener = new StudyMenuListener(menuAdd, menuDel, menuExit);
+    protected void addListeners(JMenuItem menuAdd, JMenuItem menuDel, JMenuItem menuExit, UISwapInterface swap) {
+        ActionListener listener = new StudyMenuListener(menuAdd, menuDel, menuExit, swap);
         menuAdd.addActionListener(listener);
         menuDel.addActionListener(listener);
         menuExit.addActionListener(listener);
