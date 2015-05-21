@@ -3,7 +3,7 @@ package Windows_Study;
 import Constants.C;
 import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
-import Elements.Element;
+import Items.Element;
 import Files.FileOpener;
 import Windows_Submenus.StudyMenu;
 import java.awt.CardLayout;
@@ -16,20 +16,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
-public class StudyF extends JFrame implements UISwapInterface {
+public class Study extends JFrame implements UISwapInterface {
 
+    public static int memorized, reviewed, index = 0;
     public static String fName;
-    CardLayout cards = new CardLayout();
-    
+    private CardLayout cards = new CardLayout();
     public static ArrayList<Element> list;
 
-    public StudyF(String fName) {
+    public Study(String fName) throws IOException {
         this.fName = fName;
         FileOpener file = new FileOpener(fName);
         try {
             list = file.loadFile();
         } catch (IOException | ParseException ex) {
-            Logger.getLogger(StudyF.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Study.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

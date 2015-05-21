@@ -1,12 +1,18 @@
 package Windows_Study_Show;
 
 import Constants.C;
-import Elements.Element;
+import Items.Element;
 import Files.FileUpdater;
-import Windows_Study.StudyF;
+import Files.StatsReader;
+import Files.UpdateStats;
+import Items.StatsHistory;
+import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -47,11 +53,11 @@ public class ShowListener extends AbstractAction {
     private void setFields() {
         while (true) {
             if (!lastItem()) {
-                ++C.INDEX;
+                ++Study.index;
                 if (hasNext()) {
-                    if (list.get(C.INDEX).isReviewable()) {
-                        question.setText(list.get(C.INDEX).getQuestion());
-                        answer.setText(list.get(C.INDEX).getAnswer());
+                    if (list.get(Study.index).isReviewable()) {
+                        question.setText(list.get(Study.index).getQuestion());
+                        answer.setText(list.get(Study.index).getAnswer());
                         answer.setVisible(false);
                         userInput.setVisible(true);
                         break;
@@ -66,16 +72,24 @@ public class ShowListener extends AbstractAction {
     }
     
     private boolean hasNext() {
-        return C.INDEX < list.size();
+        return Study.index < list.size();
     }
     
     private boolean lastItem() {
-        return C.INDEX+1 == list.size();
+        return Study.index+1 == list.size();
     }
     
     private void close() {
-        FileUpdater file = new FileUpdater(StudyF.fName);
-        file.update(StudyF.list);
+        FileUpdater file = new FileUpdater(Study.fName);
+        file.update(Study.list);
+        
+        
+        try {
+            StatsHistory history = new StatsReader().getHistory();
+            UpdateStats.update(history);
+        } catch (IOException ex) {
+                Logger.getLogger(ShowListener.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.exit(0);
     }
 }

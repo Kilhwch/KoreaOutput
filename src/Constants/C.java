@@ -18,10 +18,9 @@ public class C {
     
     // Other
     public static final String REVIEWED = "Items reviewed: ";
-    public static final String MEMORIZED = "Items memorized/deleted: ";
+    public static final String MEMORIZED = "Items memorized: ";
     public static final String SHOW = "show";
     public static final String HIDE = "hide";
-    public static int INDEX = 0;
 
     public C() {
     }

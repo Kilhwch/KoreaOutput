@@ -2,7 +2,7 @@ package Windows;
 
 import Constants.C;
 import Files.FileNames;
-import Windows_Study.StudyF;
+import Windows_Study.Study;
 import Windows_Submenus.MainMenu;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -11,6 +11,9 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -25,14 +28,14 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class MainF extends JPanel {
+public class Main extends JPanel {
 
 
     
     
     public static void main(String[] args) {
         final JFrame frame = new JFrame(C.TITLE);
-        JPanel pane = new MainF(frame);
+        JPanel pane = new Main(frame);
         frame.add("Center", pane);
         
         JMenuBar menu = new MainMenu();
@@ -46,7 +49,7 @@ public class MainF extends JPanel {
         frame.setVisible(true);
     }
     
-    public MainF(final JFrame frame) {
+    public Main(final JFrame frame) {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -113,9 +116,15 @@ public class MainF extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (list.getSelectedIndex() != -1) {
-                    StudyF study = new StudyF(files[list.getSelectedIndex()].getName());
-                    frame.setVisible(false);
-                    study.windowInit();
+                    Study study;
+                    try {
+                        study = new Study(files[list.getSelectedIndex()].getName());
+                        frame.setVisible(false);
+                        study.windowInit();
+                    } catch (IOException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
             }
         });

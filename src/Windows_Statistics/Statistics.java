@@ -1,5 +1,4 @@
-package Windows;
-
+package Windows_Statistics;
 
 import Constants.C;
 import Files.StatsReader;
@@ -11,10 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
-public class Stats extends JFrame {
+public class Statistics extends JFrame {
 
 
-    public Stats() {
+    public Statistics() {
         setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
         setTitle("Statistics");
         setLocationRelativeTo(null);
@@ -25,7 +24,7 @@ public class Stats extends JFrame {
     public void open() throws IOException {
         
         StatsReader stats = new StatsReader();
-        stats.readStats();
+        stats.getHistory();
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -43,14 +42,14 @@ public class Stats extends JFrame {
         c.gridx = 1;
         c.gridy = 2;
         JLabel reviewed = new JLabel();
-        reviewed.setText(C.REVIEWED + stats.getReviewed());
+        reviewed.setText(C.REVIEWED + stats.getHistory().getReviewed());
         gridbag.setConstraints(reviewed, c);
         add(reviewed);
         
         c.gridx = 1;
         c.gridy = 3;
         JLabel memorized = new JLabel();
-        memorized.setText(C.MEMORIZED + stats.getMemorized());
+        memorized.setText(C.MEMORIZED + stats.getHistory().getMemorized());
         gridbag.setConstraints(memorized, c);
         add(memorized);
         

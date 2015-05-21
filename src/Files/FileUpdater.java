@@ -1,7 +1,7 @@
 package Files;
 
 import Constants.C;
-import Elements.Element;
+import Items.Element;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -20,7 +20,7 @@ public class FileUpdater {
         this.fName = fName;
     }
     
-        public void update(ArrayList<Element> list) {
+    public void update(ArrayList<Element> list) {
         try {
             File file = new File(C.ITEMSPATH + fName);
             File temp = new File(C.ITEMSPATH + "tmp.txt");
@@ -47,32 +47,4 @@ public class FileUpdater {
             ex.printStackTrace();
         }
     }
-        
-        public void updateStats(String[] list) {
-            try {
-            File file = new File(C.STATSPATH + C.STATS);
-            File temp = new File(C.STATSPATH + "tmp1.txt");
-
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            BufferedWriter pw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(temp), "UTF-8"));
-
-            for (String string : list) {
-                pw.write(string);
-                pw.newLine();
-            }
-
-            pw.flush();
-            pw.close();
-            br.close();
-            file.delete();
-            temp.renameTo(file);
-        }
-        
-        catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        }
 }

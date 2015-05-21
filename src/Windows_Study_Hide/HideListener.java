@@ -1,7 +1,8 @@
 package Windows_Study_Hide;
 
 import Constants.C;
-import Elements.Element;
+import Items.Element;
+import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -36,28 +37,29 @@ public class HideListener extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ++Study.reviewed;
         if (e.getActionCommand().equals(Actions.Easy.name())) {
-            list.get(C.INDEX-1).calculateDue("easy");
+            list.get(Study.index-1).calculateDue("easy");
             setFields();
             swap.swapView(C.HIDE);
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
-            list.get(C.INDEX-1).calculateDue("medium");
+            list.get(Study.index-1).calculateDue("medium");
             setFields();
             swap.swapView(C.HIDE);
         }
         
         else if (e.getActionCommand().equals(Actions.Hard.name())) {
-            list.get(C.INDEX-1).calculateDue("hard");
+            list.get(Study.index-1).calculateDue("hard");
             setFields();
             swap.swapView(C.HIDE);
         }
     }
     
     private void setFields() {
-        question.setText(list.get(C.INDEX).getQuestion());
-        answer.setText(list.get(C.INDEX).getAnswer());
+        question.setText(list.get(Study.index).getQuestion());
+        answer.setText(list.get(Study.index).getAnswer());
         answer.setVisible(true);
         userInput.setVisible(false);
     }
