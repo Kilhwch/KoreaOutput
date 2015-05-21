@@ -1,10 +1,10 @@
-What?
+﻿What?
 
 A simple flash card program that allows the user to practice Korean keyboard. Please google "spaced repetition" if you are not familiar with flash cards. Note that the program has currently no built-in vocabulary or sentences, but aims to make importing big datasets easy.
 
 Building flash cards
 
-Flash card format = question:answer:date. (Date tells the difficulty of the card. If the card is easy, you should set the date further away. Date is set 0 or null if left unspecified). 
+Flash card format = question:answer:date. (Date tells the difficulty of the card. If the card is easy, you should set the date further away. Date is set to the current date if left unspecified). 
 
 Supported file formats
 
