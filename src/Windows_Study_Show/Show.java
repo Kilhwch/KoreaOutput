@@ -1,16 +1,14 @@
-
 package Windows_Study_Show;
 
-import Windows_Study_Hide.HideListener;
-import Items.Element;    
+import Windows_Study_Hide.HideListener; 
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -20,12 +18,11 @@ import javax.swing.SwingConstants;
 public class Show extends JPanel {
 
     private UISwapInterface swap;
+    private JMenuItem delete;
     
-    private ArrayList<Element> list;
-
-    public Show(UISwapInterface swap, ArrayList<Element> list) {
+    public Show(UISwapInterface swap, JMenuItem delete) {
         this.swap = swap;
-        this.list = list;
+        this.delete = delete;
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -61,17 +58,8 @@ public class Show extends JPanel {
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
+        question.setText(Study.list.get(Study.index).getQuestion());
         gridbag.setConstraints(question, c);
-        
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(Study.index).isReviewable()) {
-                question.setText(list.get(Study.index).getQuestion());
-                break;
-            }
-            else {
-                Study.index++;
-            }
-        }
         add(question);
         
         c.gridwidth = 3;
@@ -86,17 +74,7 @@ public class Show extends JPanel {
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
         JLabel answer = new JLabel("", SwingConstants.CENTER);
-        
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(Study.index).isReviewable()) {
-                answer.setText(list.get(Study.index).getAnswer());
-                break;
-            }
-            else {
-                Study.index++;
-            }
-        }
-        
+        answer.setText(Study.list.get(Study.index).getAnswer());
         gridbag.setConstraints(answer, c);
         add(answer);
         
@@ -109,9 +87,10 @@ public class Show extends JPanel {
         userInput.setVisible(false);
         add(userInput);
         
-        ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, list);
+        ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, delete);
         easy.addActionListener(listener);
         medium.addActionListener(listener);
         hard.addActionListener(listener);
+        delete.addActionListener(listener);
     }
 }

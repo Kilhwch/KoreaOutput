@@ -35,15 +35,16 @@ public class Study extends JFrame implements UISwapInterface {
     }
 
     public void windowInit() {
+        StudyMenu studyMenu = new StudyMenu(); // swap oli parametreis
+        JMenuBar menu = studyMenu;
+        setJMenuBar(menu);
+        
         setLayout(cards);
-        Hide hide = new Hide(this, list);
-        Show show = new Show(this, list);
+        Hide hide = new Hide(this, studyMenu.getDelete());
+        Show show = new Show(this, studyMenu.getDelete());
         
         add(hide, C.HIDE);
         add(show, C.SHOW);
-        
-        JMenuBar menu = new StudyMenu(this);
-        setJMenuBar(menu);
         
         setTitle(fName);
         ImageIcon icon = new ImageIcon(C.ICONPATH);
@@ -65,3 +66,6 @@ public class Study extends JFrame implements UISwapInterface {
         cards.show(getContentPane(), view);
     }
 }
+
+
+// Removing last item bug fix

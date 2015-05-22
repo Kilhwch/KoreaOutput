@@ -62,8 +62,6 @@ public class Main extends JPanel {
         gridbag.setConstraints(top, c);
         add(top);
         
-        
-        
         c.fill = GridBagConstraints.NONE;
         c.anchor = GridBagConstraints.PAGE_START;
         c.gridx = 1;

@@ -1,26 +1,26 @@
 package Windows_Study_Hide;
 
 import Constants.C;
-import Items.Element;
+import SaveAndClose.SaveAndClose;
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JTextField;
 
 public class HideListener extends AbstractAction {
 
     public UISwapInterface swap;
-    private ArrayList<Element> list;
     private JButton easy, medium, hard;
     private JLabel question, answer;
     private JTextField userInput;
+    private JMenuItem delete;
     
     public HideListener(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, 
-            JTextField userInput, UISwapInterface swap, ArrayList<Element> list) {
+            JTextField userInput, UISwapInterface swap, JMenuItem delete) {
         this.easy = easy;
         this.medium = medium;
         this.hard = hard;
@@ -28,39 +28,67 @@ public class HideListener extends AbstractAction {
         this.answer = answer;
         this.userInput = userInput;
         this.swap = swap;
-        this.list = list;
+        this.delete = delete;
     }
     
     private enum Actions {
-        Easy, Medium, Hard
+        Easy, Medium, Hard, Delete
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         ++Study.reviewed;
         if (e.getActionCommand().equals(Actions.Easy.name())) {
-            list.get(Study.index-1).calculateDue("easy");
-            setFields();
-            swap.swapView(C.HIDE);
+            Study.list.get(Study.index).calculateDue("easy");
+            if (!lastItem()) {
+                Study.index++;
+                setNextItem(Study.index+1);
+                swap.swapView(C.HIDE);
+                
+            } else new SaveAndClose().execute();
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
-            list.get(Study.index-1).calculateDue("medium");
-            setFields();
-            swap.swapView(C.HIDE);
+            Study.list.get(Study.index).calculateDue("medium");
+            if (!lastItem()) {
+                Study.index++;
+                setNextItem(Study.index+1);
+                swap.swapView(C.HIDE);
+
+            } else new SaveAndClose().execute();
         }
         
         else if (e.getActionCommand().equals(Actions.Hard.name())) {
-            list.get(Study.index-1).calculateDue("hard");
-            setFields();
+            Study.list.get(Study.index).calculateDue("hard");
+            if (!lastItem()) {
+                Study.index++;
+                setNextItem(Study.index+1);
+                swap.swapView(C.HIDE);
+            } else new SaveAndClose().execute();
+        }
+        
+        else if (e.getActionCommand().equals(Actions.Delete.name())) {
+            System.out.println("delete @ hide");
+            Study.list.remove(Study.index);
+            setNextItem(Study.index);
             swap.swapView(C.HIDE);
+        }
+        
+        else { 
+            new SaveAndClose().execute();
         }
     }
     
-    private void setFields() {
-        question.setText(list.get(Study.index).getQuestion());
-        answer.setText(list.get(Study.index).getAnswer());
+    public void setNextItem(Integer index) {
+        question.setText(Study.list.get(Study.index).getQuestion());
+        answer.setText(Study.list.get(Study.index).getAnswer());
         answer.setVisible(true);
         userInput.setVisible(false);
+    }
+    
+    private boolean lastItem() {
+        if ((Study.list.size()-1) == Study.index) {
+            return true;
+        } else return false;
     }
 }

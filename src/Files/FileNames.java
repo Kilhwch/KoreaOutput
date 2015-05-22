@@ -1,10 +1,7 @@
-
 package Files;
 
 import Constants.C;
 import java.io.File;
-
-
 
 public class FileNames {
     

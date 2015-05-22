@@ -8,9 +8,10 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -20,11 +21,11 @@ import javax.swing.SwingConstants;
 public class Hide extends JPanel {
 
     private UISwapInterface swap;
-    private ArrayList<Element> list;
+    private JMenuItem delete;
 
-    public Hide(UISwapInterface swap, ArrayList<Element> list) {
+    public Hide(UISwapInterface swap, JMenuItem delete) {
         this.swap = swap;
-        this.list = list;
+        this.delete = delete;
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -45,19 +46,10 @@ public class Hide extends JPanel {
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
+        if (hasFirstQuestion()) {
+            question.setText(getFirstQuestion());
+        } else System.exit(0);
         gridbag.setConstraints(question, c);
-        // first question
-        
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(Study.index).isReviewable()) {
-                question.setText(list.get(Study.index).getQuestion());
-                break;
-            }
-            else {
-                Study.index++;
-            }
-        }
-
         add(question);
         
         c.gridx = 6;
@@ -86,7 +78,23 @@ public class Hide extends JPanel {
         gridbag.setConstraints(userInput, c);
         add(userInput); 
         
-        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, list);
+        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, delete);
         check.addActionListener(listener);
+        delete.addActionListener(listener);
+    }
+    
+    private Boolean hasFirstQuestion() {
+        for (Element elem : Study.list) {
+            if (elem.isReviewable()) {
+                return true;
+            } else {
+                Study.index++;
+            }
+        }
+        return false;
+    }
+    
+    private String getFirstQuestion() {
+        return Study.list.get(0).getQuestion();
     }
 }
