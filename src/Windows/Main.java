@@ -96,6 +96,7 @@ public class Main extends JPanel {
         add(list);
         
         JButton start = new JButton("Start");
+        start.setBackground(Color.white);
         c.anchor = GridBagConstraints.CENTER;
         c.gridx = 1;
         c.gridy = 4;

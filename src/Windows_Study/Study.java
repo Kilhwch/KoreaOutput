@@ -71,4 +71,5 @@ public class Study extends JFrame implements UISwapInterface {
     }
 }
 
-// Make sure Exit submenu performs saveclose
+
+// Bug, loads the first question at times even though it should not be loaded

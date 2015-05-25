@@ -3,6 +3,7 @@ package Windows_Study_Show;
 import Windows_Study_Hide.HideListener; 
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
@@ -27,6 +28,7 @@ public class Show extends JPanel {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
+        setBackground(Color.WHITE);
         
         c.weightx = 4;
         c.weighty = 4;
@@ -37,6 +39,7 @@ public class Show extends JPanel {
         c.gridx = 6; 
         c.gridy = 5;
         JButton easy = new JButton("Easy");
+        easy.setBackground(Color.white);
         gridbag.setConstraints(easy, c);
         add(easy);
         
@@ -44,12 +47,14 @@ public class Show extends JPanel {
         c.gridx = 5; 
         c.gridy = 5;
         JButton medium = new JButton("Medium");
+        medium.setBackground(Color.white);
         gridbag.setConstraints(medium, c);
         add(medium);
         
-        c.gridx = 4; 
+        c.gridx = 4;
         c.gridy = 5;
         JButton hard = new JButton("Hard");
+        hard.setBackground(Color.white);
         gridbag.setConstraints(hard, c);
         add(hard);
         

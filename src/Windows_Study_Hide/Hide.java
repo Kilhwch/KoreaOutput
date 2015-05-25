@@ -4,6 +4,7 @@ import Windows_Study_Show.ShowListener;
 import Items.Element;
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,9 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 
 public class Hide extends JPanel {
@@ -30,6 +36,7 @@ public class Hide extends JPanel {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
+        setBackground(Color.WHITE);
         
         c.weightx = 4;
         c.weighty = 4;
@@ -37,6 +44,7 @@ public class Hide extends JPanel {
         c.gridx = 6; 
         c.gridy = 5;
         JButton check = new JButton("Check");
+        check.setBackground(Color.white);
         check.setPreferredSize(new Dimension(300, 30));
         gridbag.setConstraints(check, c);
         add(check);
@@ -46,9 +54,10 @@ public class Hide extends JPanel {
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
         JLabel question = new JLabel("", SwingConstants.CENTER);
-        if (hasFirstQuestion()) {
-            question.setText(getFirstQuestion());
-        } else System.exit(0);
+        
+        question.setText(getFirstQuestion());
+        if (question.getText().equals("")) System.exit(0);
+        
         gridbag.setConstraints(question, c);
         add(question);
         
@@ -74,9 +83,16 @@ public class Hide extends JPanel {
         c.gridx = 6;
         c.gridy = 5;
         c.anchor = GridBagConstraints.CENTER;
-        JTextField userInput = new JTextField();
-        gridbag.setConstraints(userInput, c);
-        add(userInput); 
+        
+        JTextPane userInput = new JTextPane();
+            StyledDocument doc = userInput.getStyledDocument();
+            SimpleAttributeSet center = new SimpleAttributeSet();
+            StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+            doc.setParagraphAttributes(0, doc.getLength(), center, false);
+        JScrollPane scroll = new JScrollPane(userInput);
+        scroll.setBorder(null);
+        gridbag.setConstraints(scroll, c);
+        add(scroll); 
         
         ActionListener listener = new ShowListener(swap, check, question, answer, userInput, delete, exit);
         check.addActionListener(listener);
@@ -84,18 +100,14 @@ public class Hide extends JPanel {
         exit.addActionListener(listener);
     }
     
-    private Boolean hasFirstQuestion() {
+    private String getFirstQuestion() {
         for (Element elem : Study.list) {
             if (elem.isReviewable()) {
-                return true;
+                return elem.getQuestion();
             } else {
                 Study.index++;
             }
         }
-        return false;
-    }
-    
-    private String getFirstQuestion() {
-        return Study.list.get(0).getQuestion();
+        return "";
     }
 }

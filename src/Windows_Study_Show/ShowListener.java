@@ -9,20 +9,20 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 
 public class ShowListener extends AbstractAction {
 
     private JButton check;
     private JLabel question, answer;
-    private JTextField userInput;
+    private JTextPane userInput;
     private UISwapInterface swap;
     private JMenuItem delete, exit;
     
     
     public ShowListener(UISwapInterface swap, JButton check, JLabel question, JLabel answer, 
-            JTextField userInput, JMenuItem delete, JMenuItem exit) {
+            JTextPane userInput, JMenuItem delete, JMenuItem exit) {
         this.swap = swap;
         this.check = check;
         this.question = question;
