@@ -10,7 +10,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -21,11 +20,12 @@ import javax.swing.SwingConstants;
 public class Hide extends JPanel {
 
     private UISwapInterface swap;
-    private JMenuItem delete;
-
-    public Hide(UISwapInterface swap, JMenuItem delete) {
+    private JMenuItem delete, exit;
+    
+    public Hide(UISwapInterface swap, JMenuItem delete, JMenuItem exit) {
         this.swap = swap;
         this.delete = delete;
+        this.exit = exit;
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -78,9 +78,10 @@ public class Hide extends JPanel {
         gridbag.setConstraints(userInput, c);
         add(userInput); 
         
-        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, delete);
+        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, delete, exit);
         check.addActionListener(listener);
         delete.addActionListener(listener);
+        exit.addActionListener(listener);
     }
     
     private Boolean hasFirstQuestion() {

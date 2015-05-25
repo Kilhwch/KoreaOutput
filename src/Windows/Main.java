@@ -2,14 +2,18 @@ package Windows;
 
 import Constants.C;
 import Files.FileNames;
+import SaveAndClose.SaveAndClose;
 import Windows_Study.Study;
 import Windows_Submenus.MainMenu;
+import com.sun.java.accessibility.util.AWTEventMonitor;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -29,9 +33,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class Main extends JPanel {
-
-
-    
     
     public static void main(String[] args) {
         final JFrame frame = new JFrame(C.TITLE);
@@ -122,7 +123,6 @@ public class Main extends JPanel {
                     } catch (IOException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
                 }
             }
         });

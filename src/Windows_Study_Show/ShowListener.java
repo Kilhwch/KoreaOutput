@@ -18,22 +18,23 @@ public class ShowListener extends AbstractAction {
     private JLabel question, answer;
     private JTextField userInput;
     private UISwapInterface swap;
-    private JMenuItem delete;
+    private JMenuItem delete, exit;
     
     
     public ShowListener(UISwapInterface swap, JButton check, JLabel question, JLabel answer, 
-            JTextField userInput, JMenuItem delete) {
+            JTextField userInput, JMenuItem delete, JMenuItem exit) {
         this.swap = swap;
         this.check = check;
         this.question = question;
         this.answer = answer;
         this.userInput = userInput;
         this.delete = delete;
+        this.exit = exit;
     }
     
     
     private enum Actions {
-        Check, Delete
+        Check, Exit, Delete
     }
 
     @Override
@@ -48,7 +49,6 @@ public class ShowListener extends AbstractAction {
         }
         
         else if (e.getActionCommand().equals(Actions.Delete.name())) {
-            System.out.println("Delete @ show");
             setNextItem(Study.index);
             swap.swapView(C.HIDE);
         }

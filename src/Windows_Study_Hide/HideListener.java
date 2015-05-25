@@ -32,7 +32,7 @@ public class HideListener extends AbstractAction {
     }
     
     private enum Actions {
-        Easy, Medium, Hard, Delete
+        Easy, Medium, Hard, Exit, Delete
     }
 
     @Override
@@ -68,10 +68,15 @@ public class HideListener extends AbstractAction {
         }
         
         else if (e.getActionCommand().equals(Actions.Delete.name())) {
-            System.out.println("delete @ hide");
             Study.list.remove(Study.index);
-            setNextItem(Study.index);
-            swap.swapView(C.HIDE);
+            if (!deletingLastItem()) {
+                setNextItem(Study.index);
+                swap.swapView(C.HIDE);
+            } else new SaveAndClose().execute();
+        }
+        
+        else if (e.getActionCommand().equals(Actions.Exit.name())) {
+            new SaveAndClose().execute();
         }
         
         else { 
@@ -84,6 +89,12 @@ public class HideListener extends AbstractAction {
         answer.setText(Study.list.get(Study.index).getAnswer());
         answer.setVisible(true);
         userInput.setVisible(false);
+    }
+    
+    private boolean deletingLastItem() {
+        if (Study.list.size() == Study.index) {
+            return true;
+        } else return false;
     }
     
     private boolean lastItem() {
