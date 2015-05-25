@@ -70,6 +70,3 @@ public class Study extends JFrame implements UISwapInterface {
         cards.show(getContentPane(), view);
     }
 }
-
-
-// Bug, loads the first question at times even though it should not be loaded
