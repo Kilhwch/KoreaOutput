@@ -1,7 +1,7 @@
 package Windows_Study_Hide;
 
 import Constants.C;
-import SaveAndClose.SaveAndClose;
+import Save.Save;
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
@@ -45,7 +45,7 @@ public class HideListener extends AbstractAction {
                 setNextItem(Study.index+1);
                 swap.swapView(C.HIDE);
                 
-            } else new SaveAndClose().execute();
+            } else new Save().andClose(true);
         }
         
         else if (e.getActionCommand().equals(Actions.Medium.name())) {
@@ -55,7 +55,7 @@ public class HideListener extends AbstractAction {
                 setNextItem(Study.index+1);
                 swap.swapView(C.HIDE);
 
-            } else new SaveAndClose().execute();
+            } else new Save().andClose(true);
         }
         
         else if (e.getActionCommand().equals(Actions.Hard.name())) {
@@ -64,7 +64,7 @@ public class HideListener extends AbstractAction {
                 Study.index++;
                 setNextItem(Study.index+1);
                 swap.swapView(C.HIDE);
-            } else new SaveAndClose().execute();
+            } else new Save().andClose(true);
         }
         
         else if (e.getActionCommand().equals(Actions.Delete.name())) {
@@ -72,11 +72,12 @@ public class HideListener extends AbstractAction {
             if (!deletingLastItem()) {
                 setNextItem(Study.index);
                 swap.swapView(C.HIDE);
-            } else new SaveAndClose().execute();
+            } else new Save().andClose(true);
         }
         
         else if (e.getActionCommand().equals(Actions.Back.name())) {
-            System.out.println("pressed back hidelist");
+            new Save().andClose(false);
+            swap.swapView(C.MAIN);
         }
         
         else if (e.getActionCommand().equals(Actions.Add.name())) {
@@ -88,7 +89,7 @@ public class HideListener extends AbstractAction {
         }
         
         else {
-            new SaveAndClose().execute();
+            new Save().andClose(true);
         }
     }
     

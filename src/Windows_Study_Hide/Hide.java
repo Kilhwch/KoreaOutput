@@ -95,8 +95,8 @@ public class Hide extends JPanel {
         ActionListener listener = new ShowListener(swap, check, question, answer, userInput, menuItems);
         check.addActionListener(listener);
         
-        for (int i = 0; i < menuItems.length; i++) {
-            menuItems[i].addActionListener(listener);
+        for (JMenuItem menuItem : menuItems) {
+            menuItem.addActionListener(listener);
         }
     }
     

@@ -5,7 +5,7 @@ import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
 import Items.Element;
 import Files.FileOpener;
-import SaveAndClose.SaveAndClose;
+import Save.Save;
 import Windows_Submenus.StudyMenu;
 import java.awt.CardLayout;
 import java.awt.event.WindowAdapter;
@@ -13,7 +13,6 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -25,11 +24,13 @@ public class Study extends JFrame implements UISwapInterface {
 
     public static int memorized, reviewed, index = 0;
     public static String fName;
+    public static JFrame mainFrame;
     private CardLayout cards = new CardLayout();
     public static ArrayList<Element> list;
 
-    public Study(String fName) throws IOException {
+    public Study(String fName, JFrame mainFrame) throws IOException {
         this.fName = fName;
+        this.mainFrame = mainFrame;
         FileOpener file = new FileOpener(fName);
         try {
             list = file.loadFile();
@@ -51,6 +52,7 @@ public class Study extends JFrame implements UISwapInterface {
         add(hide, C.HIDE);
         add(show, C.SHOW);
         
+        
         setTitle(fName);
         ImageIcon icon = new ImageIcon(C.ICONPATH);
         setIconImage(icon.getImage());
@@ -62,7 +64,7 @@ public class Study extends JFrame implements UISwapInterface {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                new SaveAndClose().execute();
+                new Save().andClose(true);
                 e.getWindow().dispose();
             }
         });
@@ -70,6 +72,12 @@ public class Study extends JFrame implements UISwapInterface {
     
     @Override
     public void swapView(String view) {
-        cards.show(getContentPane(), view);
+        if (view.equals(C.MAIN)) {
+            mainFrame.setVisible(true);
+            setVisible(false);
+        }
+        else {
+            cards.show(getContentPane(), view);
+        }
     }
 }

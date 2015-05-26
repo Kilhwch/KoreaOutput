@@ -1,4 +1,4 @@
-package SaveAndClose;
+package Save;
 
 import Files.FileUpdater;
 import Files.StatsReader;
@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SaveAndClose {
+public class Save {
  
-    public void execute() {
+    public void andClose(Boolean close) {
         FileUpdater file = new FileUpdater(Study.fName);
         file.update(Study.list);
         
@@ -22,6 +22,7 @@ public class SaveAndClose {
         } catch (IOException ex) {
                 Logger.getLogger(HideListener.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.exit(0);
+        
+        if (close) System.exit(0);
     }
 }

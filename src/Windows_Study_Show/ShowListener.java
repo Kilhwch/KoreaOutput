@@ -1,7 +1,7 @@
 package Windows_Study_Show;
 
 import Constants.C;
-import SaveAndClose.SaveAndClose;
+import Save.Save;
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
 import java.awt.event.ActionEvent;
@@ -64,7 +64,7 @@ public class ShowListener extends AbstractAction {
         }
         
         else {
-            new SaveAndClose().execute();
+            new Save().andClose(true);
         }
     }
     

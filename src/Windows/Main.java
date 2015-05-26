@@ -114,7 +114,7 @@ public class Main extends JPanel {
                 if (list.getSelectedIndex() != -1) {
                     Study study;
                     try {
-                        study = new Study(files[list.getSelectedIndex()].getName());
+                        study = new Study(files[list.getSelectedIndex()].getName(), frame);
                         frame.setVisible(false);
                         study.windowInit();
                     } catch (IOException ex) {
