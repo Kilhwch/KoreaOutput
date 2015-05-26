@@ -81,3 +81,6 @@ public class Study extends JFrame implements UISwapInterface {
         }
     }
 }
+
+// Next open FileOpener, and learn regex to check if string is a valid date
+// Goal is to set date to Current if user doesnt specify a date @ txt file
