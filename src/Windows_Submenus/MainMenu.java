@@ -29,10 +29,6 @@ public class MainMenu extends JMenuBar {
         menuBar.add(menu);
         add(menuBar);
         
-        addListeners(menuStats, menuHelp, menuExit);
-    }
-    
-    protected void addListeners(JMenuItem menuStats, JMenuItem menuHelp, JMenuItem menuExit) {
         ActionListener listener = new MainMenuListener(menuStats, menuHelp, menuExit);
         menuStats.addActionListener(listener);
         menuHelp.addActionListener(listener);

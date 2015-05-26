@@ -19,11 +19,11 @@ import javax.swing.SwingConstants;
 public class Show extends JPanel {
 
     private UISwapInterface swap;
-    private JMenuItem delete;
+    private JMenuItem[] menuItems;
     
-    public Show(UISwapInterface swap, JMenuItem delete) {
+    public Show(UISwapInterface swap, JMenuItem[] menuItems) {
         this.swap = swap;
-        this.delete = delete;
+        this.menuItems = menuItems;
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -92,10 +92,13 @@ public class Show extends JPanel {
         userInput.setVisible(false);
         add(userInput);
         
-        ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, delete);
+        ActionListener listener = new HideListener(easy, medium, hard, question, answer, userInput, swap, menuItems);
         easy.addActionListener(listener);
         medium.addActionListener(listener);
         hard.addActionListener(listener);
-        delete.addActionListener(listener);
+        
+        for (int i = 0; i < menuItems.length; i++) {
+            menuItems[i].addActionListener(listener);
+        }
     }
 }

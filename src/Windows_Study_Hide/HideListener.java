@@ -17,10 +17,10 @@ public class HideListener extends AbstractAction {
     private JButton easy, medium, hard;
     private JLabel question, answer;
     private JTextField userInput;
-    private JMenuItem delete;
+    private JMenuItem[] menuItems;
     
     public HideListener(JButton easy, JButton medium, JButton hard, JLabel question, JLabel answer, 
-            JTextField userInput, UISwapInterface swap, JMenuItem delete) {
+            JTextField userInput, UISwapInterface swap, JMenuItem[] menuItems) {
         this.easy = easy;
         this.medium = medium;
         this.hard = hard;
@@ -28,11 +28,11 @@ public class HideListener extends AbstractAction {
         this.answer = answer;
         this.userInput = userInput;
         this.swap = swap;
-        this.delete = delete;
+        this.menuItems = menuItems;
     }
     
     private enum Actions {
-        Easy, Medium, Hard, Exit, Delete
+        Easy, Medium, Hard, Exit, Delete, Back, Add, Edit
     }
 
     @Override
@@ -75,11 +75,19 @@ public class HideListener extends AbstractAction {
             } else new SaveAndClose().execute();
         }
         
-        else if (e.getActionCommand().equals(Actions.Exit.name())) {
-            new SaveAndClose().execute();
+        else if (e.getActionCommand().equals(Actions.Back.name())) {
+            System.out.println("pressed back hidelist");
         }
         
-        else { 
+        else if (e.getActionCommand().equals(Actions.Add.name())) {
+            System.out.println("pressed add hidelist");
+        }
+        
+        else if (e.getActionCommand().equals(Actions.Edit.name())) {
+            System.out.println("pressed edit hidelist");
+        }
+        
+        else {
             new SaveAndClose().execute();
         }
     }

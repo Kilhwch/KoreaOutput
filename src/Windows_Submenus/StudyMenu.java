@@ -1,6 +1,7 @@
 package Windows_Submenus;
 
 import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -8,36 +9,59 @@ import javax.swing.KeyStroke;
 
 public class StudyMenu extends JMenuBar {
     
-    public JMenuItem menuAdd, menuDel, menuExit;
+    private JMenuItem add, edit, delete, back, exit;
+    private JMenuItem[] menuItems = new JMenuItem[5];
     
     public StudyMenu() {
-        JMenuBar menuBar = new JMenuBar();
-        JMenu menu = new JMenu("Menu");
+        
+        // SCREEN MENU
+        
+        JMenuBar viewBar = new JMenuBar();
+        JMenu viewMenu = new JMenu("View");
+        
+        exit = new JMenuItem("Exit", KeyEvent.VK_E);
+        exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_DOWN_MASK));
+        
+        back = new JMenuItem("Back", KeyEvent.VK_E);
+        back.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, KeyEvent.CTRL_DOWN_MASK));
+        
+        viewMenu.add(back);
+        viewMenu.add(exit);
+        
+        viewBar.add(viewMenu);
+        add(viewBar);
+        
+        
+        // ITEM MENU
+        
+        JMenuBar itemBar = new JMenuBar();
+        JMenu itemMenu = new JMenu("Item");
 
         
-        menuAdd = new JMenuItem("Add");
-        menuAdd.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK));
-        menuAdd.setEnabled(false);
+        add = new JMenuItem("Add");
+        add.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_DOWN_MASK));
         
-        menuDel = new JMenuItem("Delete", KeyEvent.VK_DELETE);
-        menuDel.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
+        delete = new JMenuItem("Delete", KeyEvent.VK_DELETE);
+        delete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, KeyEvent.CTRL_DOWN_MASK));
         
-        menuExit = new JMenuItem("Exit", KeyEvent.VK_E);
-        menuExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
+        edit = new JMenuItem("Edit");
+        edit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
         
-        menu.add(menuAdd);
-        menu.add(menuDel);
-        menu.add(menuExit);
+        itemMenu.add(add);
+        itemMenu.add(edit);
+        itemMenu.add(delete);
         
-        menuBar.add(menu);
-        add(menuBar);
+        itemBar.add(itemMenu);
+        add(itemBar);
+        
+        menuItems[0] = back;
+        menuItems[1] = exit;
+        menuItems[2] = add;
+        menuItems[3] = edit;
+        menuItems[4] = delete;
     }
     
-    public JMenuItem getDelete() {
-        return menuDel;
-    }
-
-    public JMenuItem getMenuExit() {
-        return menuExit;
+    public JMenuItem[] getMenuItems() {
+        return menuItems;
     }
 }

@@ -18,23 +18,21 @@ public class ShowListener extends AbstractAction {
     private JLabel question, answer;
     private JTextPane userInput;
     private UISwapInterface swap;
-    private JMenuItem delete, exit;
+    private JMenuItem[] menuItems;
     
     
-    public ShowListener(UISwapInterface swap, JButton check, JLabel question, JLabel answer, 
-            JTextPane userInput, JMenuItem delete, JMenuItem exit) {
+    public ShowListener(UISwapInterface swap, JButton check, JLabel question, 
+            JLabel answer, JTextPane userInput, JMenuItem[] menuItems) {
         this.swap = swap;
         this.check = check;
         this.question = question;
         this.answer = answer;
         this.userInput = userInput;
-        this.delete = delete;
-        this.exit = exit;
+        this.menuItems = menuItems;
     }
     
-    
     private enum Actions {
-        Check, Exit, Delete
+        Check, Edit, Exit, Delete, Add, Back
     }
 
     @Override
@@ -53,7 +51,19 @@ public class ShowListener extends AbstractAction {
             swap.swapView(C.HIDE);
         }
         
-        else { 
+        else if (e.getActionCommand().equals(Actions.Add.name())) {
+            System.out.println("add");
+        }
+        
+        else if (e.getActionCommand().equals(Actions.Back.name())) {
+            System.out.println("back");
+        }
+        
+        else if (e.getActionCommand().equals(Actions.Edit.name())) {
+            System.out.println("edit");
+        }
+        
+        else {
             new SaveAndClose().execute();
         }
     }

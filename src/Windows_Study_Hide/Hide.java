@@ -25,12 +25,11 @@ import javax.swing.text.StyledDocument;
 public class Hide extends JPanel {
 
     private UISwapInterface swap;
-    private JMenuItem delete, exit;
+    private JMenuItem[] menuItems;
     
-    public Hide(UISwapInterface swap, JMenuItem delete, JMenuItem exit) {
+    public Hide(UISwapInterface swap, JMenuItem[] menuItems) {
         this.swap = swap;
-        this.delete = delete;
-        this.exit = exit;
+        this.menuItems = menuItems;
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -93,10 +92,12 @@ public class Hide extends JPanel {
         gridbag.setConstraints(scroll, c);
         add(scroll); 
         
-        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, delete, exit);
+        ActionListener listener = new ShowListener(swap, check, question, answer, userInput, menuItems);
         check.addActionListener(listener);
-        delete.addActionListener(listener);
-        exit.addActionListener(listener);
+        
+        for (int i = 0; i < menuItems.length; i++) {
+            menuItems[i].addActionListener(listener);
+        }
     }
     
     private String getFirstQuestion() {

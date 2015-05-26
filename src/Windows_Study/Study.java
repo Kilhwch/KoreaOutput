@@ -13,11 +13,13 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 public class Study extends JFrame implements UISwapInterface {
 
@@ -38,12 +40,13 @@ public class Study extends JFrame implements UISwapInterface {
 
     public void windowInit() {
         StudyMenu sMenu = new StudyMenu();
-        JMenuBar jmenu = sMenu;
-        setJMenuBar(jmenu);
+        JMenuItem[] menuItems = sMenu.getMenuItems();
+        JMenuBar jMenu = sMenu;
+        setJMenuBar(jMenu);
         
         setLayout(cards);
-        Hide hide = new Hide(this, sMenu.getDelete(), sMenu.getMenuExit());
-        Show show = new Show(this, sMenu.getDelete());
+        Hide hide = new Hide(this, menuItems);
+        Show show = new Show(this, menuItems);
         
         add(hide, C.HIDE);
         add(show, C.SHOW);
