@@ -13,9 +13,20 @@ public class C {
     public static final String STATSPATH = "./Files/Statistics/";
     public static final String STATS = "Statistics.txt/";
     
-    // file types
+    // File types
     public static final int _TXT = 4;
     
+    // Errors
+    
+    public static final String DateSyntax = "Date was of wrong syntax";
+    public static final String DateMissing = "Date missing";
+    public static final String SemicolonMissing = "Missing a semicolon";
+    
+    // Help
+    
+    public static final String HELPTEXT = "What? "
+            + "Simple Spaced repetition (http://en.wikipedia.org/wiki/Spaced_repetition) "
+            + "program, that allows a way to learn foreign languages.";
     // Other
     public static final String REVIEWED = "Items reviewed: ";
     public static final String MEMORIZED = "Items memorized: ";

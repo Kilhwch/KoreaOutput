@@ -1,5 +1,6 @@
 package Files;
 import Constants.C;
+import Errors.ItemSyntax;
 import Items.Element;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,6 +16,7 @@ public class FileOpener {
 
     private final String fName;
     private ArrayList<Element> list;
+    private ItemSyntax errorHandler = new ItemSyntax();
 
     public FileOpener(String title) {
         this.fName = title;
@@ -31,11 +33,13 @@ public class FileOpener {
             if (fileNotEmpty()) {
                 BufferedReader br = new BufferedReader(new FileReader(new File(C.ITEMSPATH + fName)));
                 String line;
+                int lineNr = 0;
 
                 LocalDate current = LocalDate.now();
 
                 while ((line = br.readLine()) != null) {
-                    if (hasDate(line)) {
+                    lineNr++;
+                    if (syntaxCheck(line, lineNr)) {
                         String[] parts = line.split(":", -2);
                         String question = parts[0];
                         String answer = parts[1];
@@ -45,13 +49,12 @@ public class FileOpener {
 
                         Element ele = new Element(question, answer, date);
 
-                        // add Elements to list with dates that are in the past
                         if (date.isBefore(current) || date.isEqual(current)) {
                             ele.setReviewable(true);
                             ele.setDate(current);
                         }
 
-                        else { 
+                        else {
                             ele.setReviewable(false);
                         }
                         list.add(ele);
@@ -82,7 +85,7 @@ public class FileOpener {
         }
     }
 
-    private boolean hasDate(String line) {
+    private boolean syntaxCheck(String line, int lineNr) {
         int lastIndex = 0;
         int semicolons = 0;
         for (int i = 0; i < line.length(); i++) {
@@ -93,12 +96,18 @@ public class FileOpener {
             lastIndex++;
         }
         
-        if (semicolons < 2) return false;
+        if (semicolons < 2) { 
+            errorHandler.addError(C.SemicolonMissing, lineNr);
+            return false;
+        }
         
         String subStringed = line.substring(lastIndex);
-//        Boolean result = subStringed.matches(line)
+        if (subStringed.isEmpty()) {
+            errorHandler.addError(C.DateMissing, lineNr);
+        }
         
-        
-        return true;
+        Boolean result = subStringed.matches("^(\\d{4}-\\d{2}-\\d{2})$");
+        if (!result) errorHandler.addError(C.DateSyntax, lineNr);
+        return result;
     }
 }

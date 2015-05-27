@@ -24,9 +24,9 @@ public class Help extends JFrame {
         c.anchor = GridBagConstraints.CENTER;
         c.gridx = 1;
         c.gridy = 2;
-        JLabel reviewed = new JLabel();
-        reviewed.setText("Text here");
-        gridbag.setConstraints(reviewed, c);
-        add(reviewed);
+        JLabel helpText = new JLabel();
+        helpText.setText(C.HELPTEXT);
+        gridbag.setConstraints(helpText, c);
+        add(helpText);
     }
 }

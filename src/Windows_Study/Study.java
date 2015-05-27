@@ -1,6 +1,7 @@
 package Windows_Study;
 
 import Constants.C;
+import Errors.ItemSyntax;
 import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
 import Items.Element;
@@ -35,7 +36,7 @@ public class Study extends JFrame implements UISwapInterface {
         try {
             list = file.loadFile();
         } catch (IOException | ParseException ex) {
-            Logger.getLogger(Study.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ShowErrorWindow");
         }
     }
 
