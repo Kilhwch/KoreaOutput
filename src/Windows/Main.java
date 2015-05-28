@@ -39,7 +39,7 @@ public class Main extends JPanel {
         frame.setJMenuBar(menu);
         ImageIcon icon = new ImageIcon(C.ICONPATH);
         frame.setIconImage(icon.getImage());
-        frame.setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
+        frame.setSize(C.MAIN_W, C.MAIN_H);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);

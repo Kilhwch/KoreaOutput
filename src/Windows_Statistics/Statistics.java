@@ -14,7 +14,7 @@ public class Statistics extends JFrame {
 
 
     public Statistics() {
-        setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
+        setSize(C.MAIN_W, C.MAIN_H);
         setTitle("Statistics");
         setLocationRelativeTo(null);
         setResizable(true);

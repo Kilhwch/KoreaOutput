@@ -1,7 +1,6 @@
 package Windows_Study;
 
 import Constants.C;
-import Errors.ItemSyntax;
 import Windows_Study_Show.Show;
 import Windows_Study_Hide.Hide;
 import Items.Element;
@@ -14,8 +13,6 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -57,7 +54,7 @@ public class Study extends JFrame implements UISwapInterface {
         setTitle(fName);
         ImageIcon icon = new ImageIcon(C.ICONPATH);
         setIconImage(icon.getImage());
-        setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
+        setSize(C.MAIN_W, C.MAIN_H);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
@@ -82,6 +79,3 @@ public class Study extends JFrame implements UISwapInterface {
         }
     }
 }
-
-// Next open FileOpener, and learn regex to check if string is a valid date
-// Goal is to set date to Current if user doesnt specify a date @ txt file

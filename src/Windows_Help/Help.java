@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 public class Help extends JFrame {
     
     public Help() {
-        setSize(C.WINDOW_WIDTH, C.WINDOW_HEIGHT);
+        setSize(C.MAIN_W, C.MAIN_H);
         setTitle("Help");
         setLocationRelativeTo(null);
         setResizable(true);

@@ -1,6 +1,7 @@
 package Windows_Study_Hide;
 
 import Constants.C;
+import Items.Add;
 import Save.Save;
 import Windows_Study.Study;
 import Windows_Study.UISwapInterface;
@@ -81,7 +82,7 @@ public class HideListener extends AbstractAction {
         }
         
         else if (e.getActionCommand().equals(Actions.Add.name())) {
-            System.out.println("pressed add hidelist");
+            new Add().open();
         }
         
         else if (e.getActionCommand().equals(Actions.Edit.name())) {

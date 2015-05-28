@@ -3,8 +3,10 @@ package Constants;
 public class C {
     
     // Window
-    public static final int WINDOW_WIDTH = 500;
-    public static final int WINDOW_HEIGHT = 500;
+    public static final int MAIN_W = 500;
+    public static final int MAIN_H = 500;
+    public static final int SUB_W = 350;
+    public static final int SUB_H = 300;
     public static final String TITLE = "KoreaOutput";
     public static final String ICONPATH = "./Files/Icons/main.jpg";
     

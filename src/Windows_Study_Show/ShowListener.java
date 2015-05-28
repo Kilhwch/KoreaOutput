@@ -52,7 +52,7 @@ public class ShowListener extends AbstractAction {
         }
         
         else if (e.getActionCommand().equals(Actions.Add.name())) {
-            System.out.println("add");
+            System.out.println("add SL");
         }
         
         else if (e.getActionCommand().equals(Actions.Back.name())) {
