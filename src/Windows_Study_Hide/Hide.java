@@ -26,6 +26,7 @@ public class Hide extends JPanel {
 
     private UISwapInterface swap;
     private JMenuItem[] menuItems;
+    private static JLabel question, answer;
     
     public Hide(UISwapInterface swap, JMenuItem[] menuItems) {
         this.swap = swap;
@@ -51,7 +52,7 @@ public class Hide extends JPanel {
         c.gridx = 6; 
         c.gridy = 3;
         c.anchor = GridBagConstraints.CENTER;
-        JLabel question = new JLabel("", SwingConstants.CENTER);
+        question = new JLabel("", SwingConstants.CENTER);
         
         question.setText(getFirstQuestion());
         if (question.getText().equals("")) System.exit(0);
@@ -69,7 +70,7 @@ public class Hide extends JPanel {
         c.gridx = 6;
         c.gridy = 4;
         c.anchor = GridBagConstraints.PAGE_END;
-        JLabel answer = new JLabel("", SwingConstants.CENTER);
+        answer = new JLabel("", SwingConstants.CENTER);
         answer.setVisible(false);
         gridbag.setConstraints(answer, c);
         add(answer);
@@ -98,6 +99,12 @@ public class Hide extends JPanel {
         for (JMenuItem menuItem : menuItems) {
             menuItem.addActionListener(listener);
         }
+    }
+    
+    public static void updateItem() {
+        System.out.println("Setting: " + Study.list.get(Study.index).getQuestion());
+        question.setText(Study.list.get(Study.index).getQuestion());
+        answer.setText(Study.list.get(Study.index).getAnswer());
     }
     
     private String getFirstQuestion() {

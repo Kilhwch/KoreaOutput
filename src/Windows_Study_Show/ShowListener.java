@@ -60,7 +60,8 @@ public class ShowListener extends AbstractAction {
         }
         
         else if (e.getActionCommand().equals(Actions.Edit.name())) {
-            System.out.println("edit");
+//            System.out.println("Edit called");
+//            setNextItem(Study.index);
         }
         
         else {
@@ -70,6 +71,7 @@ public class ShowListener extends AbstractAction {
     
     
     private void setNextItem(Integer index) {
+        System.out.println("ShowList sets answer" + Study.list.get(index).getAnswer());
         question.setText(Study.list.get(index).getQuestion());
         answer.setText(Study.list.get(index).getAnswer());
         answer.setVisible(false);

@@ -1,4 +1,3 @@
-
 package Items;
 
 import Constants.C;
@@ -20,7 +19,7 @@ public class Add extends JFrame {
     
     public Add() {
         setSize(C.SUB_W, C.SUB_H);
-        setTitle("Add item");
+        setTitle("Add");
         setLocationRelativeTo(null);
         setResizable(true);
         getContentPane().setBackground(Color.WHITE);

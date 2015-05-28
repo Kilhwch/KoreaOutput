@@ -50,7 +50,6 @@ public class Study extends JFrame implements UISwapInterface {
         add(hide, C.HIDE);
         add(show, C.SHOW);
         
-        
         setTitle(fName);
         ImageIcon icon = new ImageIcon(C.ICONPATH);
         setIconImage(icon.getImage());

@@ -5,12 +5,12 @@
         <group>
             <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Study_Hide/HideListener.java</file>
             <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows/Main.java</file>
-            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Files/Import/Main.java</file>
-            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Study_Show/Show.java</file>
-            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Constants/C.java</file>
+            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Items/Edit.java</file>
+            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Files/FileOpener.java</file>
             <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Study/Study.java</file>
-            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Help/Help.java</file>
-            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Submenus/MainMenu.java</file>
+            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Study_Show/ShowListener.java</file>
+            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Items/Add.java</file>
+            <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Items/Element.java</file>
             <file>file:/C:/Users/kasper.SOLYOS/Desktop/KoreaOutput/src/Windows_Study_Hide/Hide.java</file>
         </group>
     </open-files>

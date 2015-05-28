@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Element {
 
-    private final String question, answer;
+    private String question, answer;
     private LocalDate date;
     private final Due due;
     private boolean reviewable;
@@ -40,6 +40,14 @@ public class Element {
 
     public void setReviewable(boolean reviewable) {
         this.reviewable = reviewable;
+    }
+    
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+    
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
     
     public void calculateDue(String difficulty) {
