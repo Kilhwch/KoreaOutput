@@ -30,15 +30,6 @@ public class Statistics extends JFrame {
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
         
-        c.insets = new Insets(0, 0, 30, 0);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        JSeparator top = new JSeparator(JSeparator.HORIZONTAL);
-        c.gridx = 1;
-        c.gridy = 1;
-        gridbag.setConstraints(top, c);
-        add(top);
-        
-        
         c.gridx = 1;
         c.gridy = 2;
         JLabel reviewed = new JLabel();
@@ -52,15 +43,5 @@ public class Statistics extends JFrame {
         memorized.setText(C.MEMORIZED + stats.getHistory().getMemorized());
         gridbag.setConstraints(memorized, c);
         add(memorized);
-        
-        
-        c.insets = new Insets(30, 0, 0, 0);
-        c.anchor = GridBagConstraints.PAGE_END;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        JSeparator bottom = new JSeparator(JSeparator.HORIZONTAL);
-        c.gridx = 1;
-        c.gridy = 5;
-        gridbag.setConstraints(bottom, c);
-        add(bottom);
     }
 }

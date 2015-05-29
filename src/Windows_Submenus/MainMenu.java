@@ -15,18 +15,18 @@ public class MainMenu extends JMenuBar {
         JMenuBar menuBar1 = new JMenuBar();
         JMenu menu1 = new JMenu("Menu");
 
-        JMenuItem menuImport = new JMenuItem("Import file", KeyEvent.VK_I);
-        menuImport.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_DOWN_MASK));
+        JMenuItem importFile = new JMenuItem("Import", KeyEvent.VK_I);
+        importFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I, KeyEvent.CTRL_DOWN_MASK));
         
-        JMenuItem menuStats = new JMenuItem("Statistics", KeyEvent.VK_S);
-        menuStats.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
+        JMenuItem stats = new JMenuItem("Statistics", KeyEvent.VK_S);
+        stats.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK));
         
-        JMenuItem menuExit = new JMenuItem("Exit", KeyEvent.VK_E);
-        menuExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
+        JMenuItem exit = new JMenuItem("Exit", KeyEvent.VK_E);
+        exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, KeyEvent.CTRL_DOWN_MASK));
         
-        menu1.add(menuImport);
-        menu1.add(menuStats);
-        menu1.add(menuExit);
+        menu1.add(importFile);
+        menu1.add(stats);
+        menu1.add(exit);
 
         menuBar1.add(menu1);
         add(menuBar1);
@@ -36,16 +36,17 @@ public class MainMenu extends JMenuBar {
         JMenuBar menuBar2 = new JMenuBar();
         JMenu menu2 = new JMenu("Help");
         
-        JMenuItem menuHelp = new JMenuItem("Help", KeyEvent.VK_H);
-        menuHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_DOWN_MASK));
-        menu2.add(menuHelp);
+        JMenuItem help = new JMenuItem("Help", KeyEvent.VK_H);
+        help.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, KeyEvent.CTRL_DOWN_MASK));
+        menu2.add(help);
         
         menuBar2.add(menu2);
         add(menuBar2);
         
-        ActionListener listener = new MainMenuListener(menuStats, menuHelp, menuExit);
-        menuStats.addActionListener(listener);
-        menuHelp.addActionListener(listener);
-        menuExit.addActionListener(listener);
+        ActionListener listener = new MainMenuListener(importFile, stats, help, exit);
+        importFile.addActionListener(listener);
+        stats.addActionListener(listener);
+        help.addActionListener(listener);
+        exit.addActionListener(listener);
     }
 }

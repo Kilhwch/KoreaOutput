@@ -23,7 +23,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -50,14 +49,6 @@ public class Main extends JPanel {
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
-        
-        c.insets = new Insets(0, 0, 30, 0);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        JSeparator top = new JSeparator(JSeparator.HORIZONTAL);
-        c.gridx = 1;
-        c.gridy = 1;
-        gridbag.setConstraints(top, c);
-        add(top);
         
         c.fill = GridBagConstraints.NONE;
         c.anchor = GridBagConstraints.PAGE_START;
@@ -98,15 +89,6 @@ public class Main extends JPanel {
         c.gridy = 4;
         gridbag.setConstraints(start, c);
         add(start);
-        
-        c.insets = new Insets(30, 0, 0, 0);
-        c.anchor = GridBagConstraints.PAGE_END;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        JSeparator bottom = new JSeparator(JSeparator.HORIZONTAL);
-        c.gridx = 1;
-        c.gridy = 5;
-        gridbag.setConstraints(bottom, c);
-        add(bottom);
         
         start.addActionListener(new ActionListener() {
             @Override

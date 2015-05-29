@@ -6,9 +6,9 @@ import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Main extends JFrame {
+public class Import extends JFrame {
     
-    public Main() {
+    public Import() {
         setSize(C.MAIN_W, C.MAIN_H);
         setTitle("Import file");
         setLocationRelativeTo(null);
